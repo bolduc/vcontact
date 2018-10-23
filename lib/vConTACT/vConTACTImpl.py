@@ -44,7 +44,7 @@ class vConTACT:
         #BEGIN run_vcontact
         self.callback_url = os.environ['SDK_CALLBACK_URL']
         self.gfuclient = gfu(self.callback_url)
-        file = gfuclient.genome_to_gff({'genome_ref': genome_ref})
+        file = self.gfuclient.genome_to_gff({'genome_ref': params['genome']})
         print(file)
         #END run_vcontact
         pass
