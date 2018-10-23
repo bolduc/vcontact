@@ -33,7 +33,7 @@ RUN wget --no-verbose ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/
  cp bin/* /usr/local/bin && cd / && rm -rf ncbi-blast-2.6.0+*
 
 RUN wget --no-verbose http://github.com/bbuchfink/diamond/releases/download/v0.9.10/diamond-linux64.tar.gz && \
- tar xf diamond-linux64.tar.gz && cp diamond $PATH && rm -rf diamond-linux64.tar.gz
+ tar xf diamond-linux64.tar.gz && cp diamond /usr/local/bin && rm -rf diamond-linux64.tar.gz
 
 RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
 chmod +x /usr/local/bin/cluster_one-1.0.sh
