@@ -16,6 +16,7 @@ from biokbase import log
 import requests as _requests
 import random as _random
 import os
+from vConTACT.authclient import KBaseAuth as _KBaseAuth
 
 DEPLOY = 'KB_DEPLOYMENT_CONFIG'
 SERVICE = 'KB_SERVICE_NAME'
@@ -331,9 +332,16 @@ class Application(object):
             call_id=True, logfile=self.userlog.get_log_file())
         self.serverlog.set_log_level(6)
         self.rpc_service = JSONRPCServiceCustom()
+        self.method_authentication = dict()
+        self.rpc_service.add(impl_vConTACT.run_vcontact,
+                             name='vConTACT.run_vcontact',
+                             types=[dict])
+        self.method_authentication['vConTACT.run_vcontact'] = 'required'  # noqa
         self.rpc_service.add(impl_vConTACT.status,
                              name='vConTACT.status',
                              types=[dict])
+        authurl = config.get(AUTH) if config else None
+        self.auth_client = _KBaseAuth(authurl)
 
     def __call__(self, environ, start_response):
         # Context object, equivalent to the perl impl CallContext
@@ -374,6 +382,34 @@ class Application(object):
                                }
                 ctx['provenance'] = [prov_action]
                 try:
+                    token = environ.get('HTTP_AUTHORIZATION')
+                    # parse out the method being requested and check if it
+                    # has an authentication requirement
+                    method_name = req['method']
+                    auth_req = self.method_authentication.get(
+                        method_name, 'none')
+                    if auth_req != 'none':
+                        if token is None and auth_req == 'required':
+                            err = JSONServerError()
+                            err.data = (
+                                'Authentication required for ' +
+                                'vConTACT ' +
+                                'but no authentication header was passed')
+                            raise err
+                        elif token is None and auth_req == 'optional':
+                            pass
+                        else:
+                            try:
+                                user = self.auth_client.get_user(token)
+                                ctx['user_id'] = user
+                                ctx['authenticated'] = 1
+                                ctx['token'] = token
+                            except Exception, e:
+                                if auth_req == 'required':
+                                    err = JSONServerError()
+                                    err.data = \
+                                        "Token validation failed: %s" % e
+                                    raise err
                     if (environ.get('HTTP_X_FORWARDED_FOR')):
                         self.log(log.INFO, ctx, 'X-Forwarded-For: ' +
                                  environ.get('HTTP_X_FORWARDED_FOR'))
@@ -518,6 +554,11 @@ def process_async_cli(input_file_path, output_file_path, token):
     if 'id' not in req:
         req['id'] = str(_random.random())[2:]
     ctx = MethodContext(application.userlog)
+    if token:
+        user = application.auth_client.get_user(token)
+        ctx['user_id'] = user
+        ctx['authenticated'] = 1
+        ctx['token'] = token
     if 'context' in req:
         ctx['rpc_context'] = req['context']
     ctx['CLI'] = 1

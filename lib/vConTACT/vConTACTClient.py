@@ -33,6 +33,15 @@ class vConTACT(object):
             trust_all_ssl_certificates=trust_all_ssl_certificates,
             auth_svc=auth_svc)
 
+    def run_vcontact(self, params, context=None):
+        """
+        :param params: instance of type "InParams" -> structure: parameter
+           "genome" of type "obj_ref" (Insert your typespec information here.)
+        """
+        return self._client.call_method(
+            'vConTACT.run_vcontact',
+            [params], self._service_ver, context)
+
     def status(self, context=None):
         return self._client.call_method('vConTACT.status',
                                         [], self._service_ver, context)

@@ -11,14 +11,14 @@
     },
     "parameters": [ 
         {
-            "id": "parameter_1",
-            "optional": true,
+            "id": "genome",
+            "optional": false,
             "advanced": false,
             "allow_multiple": false,
             "default_values": [ "" ],
             "field_type": "text",
             "text_options": {
-                "valid_ws_types": [ ]
+                "valid_ws_types": ["KBaseGenomeAnnotations.Assembly", "KBaseGenomes.Genome"]
             }
         }
     ],
@@ -29,8 +29,8 @@
             "method": "run_vcontact",
             "input_mapping": [
                 {
-                    "input_parameter": "parameter_1",
-                    "target_property": "parameter_1"
+                    "input_parameter": "genome",
+                    "target_property": "genome"
                 }
             ],
             "output_mapping": [

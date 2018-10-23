@@ -19,8 +19,8 @@ class vConTACT:
     # the latter method is running.
     ######################################### noqa
     VERSION = "0.0.1"
-    GIT_URL = "https://github.com/bolduc/vcontact"
-    GIT_COMMIT_HASH = "ff92f754f02d757aa925d2327fc8ef2bf0af4b07"
+    GIT_URL = ""
+    GIT_COMMIT_HASH = ""
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -32,16 +32,6 @@ class vConTACT:
         #END_CONSTRUCTOR
         pass
 
-
-    def run_vcontact(self, ctx, params):
-        """
-        :param params: instance of type "InParams" -> structure: parameter
-           "genome" of type "obj_ref" (Insert your typespec information here.)
-        """
-        # ctx is the context object
-        #BEGIN run_vcontact
-        #END run_vcontact
-        pass
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",
