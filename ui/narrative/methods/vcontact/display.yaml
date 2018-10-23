@@ -1,0 +1,41 @@
+#
+# define display information
+#
+name: vConTACT2 0.9.1
+
+tooltip: |
+    Viral cluster automatic cluster taxonomy
+
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            [app1, app2]
+        next:
+            [app3, app4]
+    methods:
+        related:
+            [method1, method2]
+        next:
+            [method3, method4]
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    parameter_1 :
+        ui-name : |
+            First parameter
+        short-hint : |
+            The first parameter
+        long-hint  : |
+            The first parameter that needs to be entered to drive the method. This might be the first of many.
+
+description : |
+    <p>vConTACT2 is a tool to perform guilt-by-contig-association automatic classification of viral contigs.</p>

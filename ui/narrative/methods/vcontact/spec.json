@@ -26,30 +26,14 @@
         "service-mapping": {
             "url": "",
             "name": "vConTACT",
-            "method": "your_method",
+            "method": "run_vcontact",
             "input_mapping": [
                 {
-                    "narrative_system_variable": "workspace",
-                    "target_argument_position": 0
-                },
-                {
                     "input_parameter": "parameter_1",
-                    "target_argument_position": 1
+                    "target_property": "parameter_1"
                 }
             ],
             "output_mapping": [
-                {
-                    "service_method_output_path": [0],
-                    "target_property": "output"
-                },
-                {
-                    "input_parameter": "parameter_1",
-                    "target_property": "input"
-                },
-                {
-                    "narrative_system_variable": "workspace",
-                    "target_property": "workspaceName"
-                }
             ]
         }
     },
