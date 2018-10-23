@@ -26,8 +26,7 @@ RUN wget http://micans.org/mcl/src/mcl-latest.tar.gz && \
  tar xf mcl-latest.tar.gz && cd mcl-14-137 && ./configure --prefix /usr/local/ && make install && \
  rm -rf /mcl-latest.tar.gz
 
-RUN wget http://www.paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar && \
-mv cluster_one-1.0.jar $PATH
+RUN wget http://www.paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar -P /usr/local/bin
 
 RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
 chmod +x $PATH/cluster_one-1.0.sh
