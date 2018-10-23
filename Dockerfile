@@ -7,7 +7,37 @@ MAINTAINER KBase Developer
 # installation scripts.
 
 # RUN apt-get update
+RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
 
+ENV PATH PATH=/usr/local/bin
+
+RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+ bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/ && \
+ rm Miniconda3-latest-Linux-x86_64.sh
+
+RUN conda install -y -c conda-forge hdf5 pytables pypandoc biopython networkx numpy pandas scipy scikit-learn psutil
+
+RUN pip install setuptools-markdown
+
+RUN git clone https://bolduc@bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && \
+pip install --no-dependencies .
+
+RUN wget http://micans.org/mcl/src/mcl-latest.tar.gz && \
+ tar xf mcl-latest.tar.gz && cd mcl-14-137 && ./configure --prefix /usr/local/ && make install && \
+ rm -rf /mcl-latest.tar.gz
+
+RUN wget http://www.paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar && \
+mv cluster_one-1.0.jar $PATH
+
+RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
+chmod +x $PATH/cluster_one-1.0.sh
+
+RUN wget --no-verbose ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-x64-linux.tar.gz && \
+ tar xf ncbi-blast-2.6.0+-x64-linux.tar.gz && cd ncbi-blast-2.6.0+ && \
+ cp bin/* $PATH && cd / && rm -rf ncbi-blast-2.6.0+*
+
+RUN wget --no-verbose http://github.com/bbuchfink/diamond/releases/download/v0.9.10/diamond-linux64.tar.gz && \
+ tar xf diamond-linux64.tar.gz && cp diamond $PATH && rm -rf diamond-linux64.tar.gz
 
 # -----------------------------------------
 
