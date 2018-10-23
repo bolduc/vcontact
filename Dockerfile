@@ -9,7 +9,7 @@ MAINTAINER KBase Developer
 # RUN apt-get update
 RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
 
-ENV PATH PATH=/usr/local/bin
+ENV PATH="/usr/local/bin:${PATH}"
 
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
  bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/ && \
