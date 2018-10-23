@@ -28,15 +28,15 @@ RUN wget http://micans.org/mcl/src/mcl-latest.tar.gz && \
 
 RUN wget http://www.paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar -P /usr/local/bin
 
-RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
-chmod +x $PATH/cluster_one-1.0.sh
-
 RUN wget --no-verbose ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-x64-linux.tar.gz && \
  tar xf ncbi-blast-2.6.0+-x64-linux.tar.gz && cd ncbi-blast-2.6.0+ && \
- cp bin/* $PATH && cd / && rm -rf ncbi-blast-2.6.0+*
+ cp bin/* /usr/local/bin && cd / && rm -rf ncbi-blast-2.6.0+*
 
 RUN wget --no-verbose http://github.com/bbuchfink/diamond/releases/download/v0.9.10/diamond-linux64.tar.gz && \
  tar xf diamond-linux64.tar.gz && cp diamond $PATH && rm -rf diamond-linux64.tar.gz
+
+RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
+chmod +x /usr/local/bin/cluster_one-1.0.sh
 
 # -----------------------------------------
 
