@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #BEGIN_HEADER
+from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
 #END_HEADER
 
 
