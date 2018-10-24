@@ -39,3 +39,10 @@ parameters :
 
 description : |
     <p>vConTACT2 is a tool to perform guilt-by-contig-association automatic classification of viral contigs.</p>
+
+publications :
+    -
+        display-text: |
+            Bolduc B, Jang H Bin, Doulcier G, You Z, Roux S, Sullivan MB. (2017). vConTACT: an iVirus tool to classify double-stranded DNA viruses that infect Archaea and Bacteria. PeerJ 5: e3243.
+        link: https://www.ncbi.nlm.nih.gov/pubmed/28480138
+        pmid: 28480138
