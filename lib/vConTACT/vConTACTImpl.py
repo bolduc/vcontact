@@ -32,6 +32,7 @@ class vConTACT:
     # be found
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
+        self.config = config
         #END_CONSTRUCTOR
         pass
 
