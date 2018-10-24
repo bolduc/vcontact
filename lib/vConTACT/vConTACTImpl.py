@@ -50,7 +50,7 @@ class vConTACT:
 
         print(file)
         vc = vConTACTUtils(self.config)
-        vc.vcontact_version()
+        vc.vcontact_help()
 
         #END run_vcontact
         pass
