@@ -47,7 +47,7 @@ class vConTACT:
         self.gfuclient = gfu(self.callback_url)
         file = self.gfuclient.genome_to_gff({'genome_ref': params['genome']})
 
-        print(file['path'])
+        print(file)
         vc = vConTACTUtils()
         vc.vcontact_version()
 
