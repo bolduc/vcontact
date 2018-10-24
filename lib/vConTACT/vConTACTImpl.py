@@ -2,6 +2,7 @@
 #BEGIN_HEADER
 import os
 from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
+from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
 #END_HEADER
 
 
@@ -45,7 +46,11 @@ class vConTACT:
         self.callback_url = os.environ['SDK_CALLBACK_URL']
         self.gfuclient = gfu(self.callback_url)
         file = self.gfuclient.genome_to_gff({'genome_ref': params['genome']})
-        print(file)
+
+        print(file['path'])
+        vc = vConTACTUtils()
+        vc.vcontact_version()
+
         #END run_vcontact
         pass
     def status(self, ctx):
