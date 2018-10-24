@@ -14,7 +14,7 @@ class vConTACTUtils:
         self.scratch = os.path.abspath(config['scratch'])
 
     def vcontact_version(self):
-        command = "vcontact --version"
+        command = "vcontact --help"
         self._run_command(command)
 
     def _run_command(self, command):
