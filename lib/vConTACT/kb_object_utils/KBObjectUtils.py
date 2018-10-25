@@ -57,25 +57,25 @@ class KBObjectUtils:
             # TODO delete shock node
             raise
 
-def _write_search_results(self, outfile):
-        # change to mustache or something later. Or just rewrite this whole thing since this is
-        # a demo
-        with open(outfile, 'w') as html_file:
-            html_file.write('<html><body>\n')
-            html_file.write('vConTACT Ran successfully')
-            html_file.write('</body></html>\n')
+    def _write_search_results(self, outfile):
+            # change to mustache or something later. Or just rewrite this whole thing since this is
+            # a demo
+            with open(outfile, 'w') as html_file:
+                html_file.write('<html><body>\n')
+                html_file.write('vConTACT Ran successfully')
+                html_file.write('</body></html>\n')
 
-def _mkdir_p(self, path):
-    """
-    _mkdir_p: make directory for given path
-    """
-    # https://stackoverflow.com/a/600612/643675
-    if not path:
-        return
-    try:
-        os.makedirs(path)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(path):
-            pass
-        else:
-            raise
+    def _mkdir_p(self, path):
+        """
+        _mkdir_p: make directory for given path
+        """
+        # https://stackoverflow.com/a/600612/643675
+        if not path:
+            return
+        try:
+            os.makedirs(path)
+        except OSError as exc:
+            if exc.errno == errno.EEXIST and os.path.isdir(path):
+                pass
+            else:
+                raise
