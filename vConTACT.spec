@@ -10,6 +10,7 @@ module vConTACT {
     typedef string obj_ref;
 
     typedef structure {
+        string workspace_name;
         obj_ref genome;
     } InParams;
 
