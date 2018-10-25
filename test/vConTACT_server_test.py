@@ -77,11 +77,6 @@ class vConTACTTest(unittest.TestCase):
 
     # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
     def test_run_vcontact(self):
-        # Prepare test objects in workspace if needed using
-        # self.getWsClient().save_objects({'workspace': self.getWsName(),
-        #                                  'objects': []})
-        #
-        # Run your method by
         ret = self.getImpl().run_vcontact(self.getContext(), {'genome': '21695/4/1'})
         #
         # Check returned data with
