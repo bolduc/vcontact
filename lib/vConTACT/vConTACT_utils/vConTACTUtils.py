@@ -9,6 +9,7 @@ def log(message, prefix_newline=False):
     """
     print(('\n' if prefix_newline else '') + '{0:.2f}'.format(time.time()) + ': ' + str(message))
 
+
 class vConTACTUtils:
 
     def __init__(self, config):

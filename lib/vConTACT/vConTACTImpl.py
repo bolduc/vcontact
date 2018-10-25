@@ -3,6 +3,8 @@
 import os
 from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
 from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
+from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
+
 #END_HEADER
 
 
@@ -51,6 +53,9 @@ class vConTACT:
         print(file)
         vc = vConTACTUtils(self.config)
         vc.vcontact_help()
+
+        kbo = KBObjectUtils(self.config)
+        kbo.create_report(params['workspace_name'])
 
         #END run_vcontact
         pass
