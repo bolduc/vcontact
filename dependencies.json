@@ -3,6 +3,10 @@
   "type" : "sdk",
   "version_tag" : "release"
 }, {
+  "module_name" : "GenomeAnnotationAPI",
+  "type" : "sdk",
+  "version_tag" : "release"
+}, {
   "module_name" : "GenomeFileUtil",
   "type" : "sdk",
   "version_tag" : "release"

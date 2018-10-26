@@ -6,6 +6,8 @@ from KBaseDataObjectToFileUtils.KBaseDataObjectToFileUtilsClient import KBaseDat
 from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
 from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 
+from ..GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
+
 #END_HEADER
 
 class vConTACT:
@@ -51,6 +53,11 @@ class vConTACT:
         file = self.gfuclient.genome_to_gff({'genome_ref': params['genome']})
 
         print(file)
+
+        self.genome_api = GenomeAnnotationAPI(self.callback_url)
+        genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": params['genome']}]})
+
+        print(genome_data)
 
         self.ofuclient = ofu(self.callback_url)
         info = self.ofuclient.GenomeToFASTA({'genome_ref': params['genome']})
