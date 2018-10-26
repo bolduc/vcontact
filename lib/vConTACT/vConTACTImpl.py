@@ -6,7 +6,7 @@ from KBaseDataObjectToFileUtils.KBaseDataObjectToFileUtilsClient import KBaseDat
 from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
 from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 
-from ..GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
+from GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
 
 #END_HEADER
 
