@@ -55,6 +55,8 @@ class vConTACT:
         self.ofuclient = ofu(self.callback_url)
         info = self.ofuclient.GenomeToFASTA({'genome_ref': params['genome']})
 
+        print(info)
+
         vc = vConTACTUtils(self.config)
         vc.vcontact_help()
 
