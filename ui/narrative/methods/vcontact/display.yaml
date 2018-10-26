@@ -38,186 +38,186 @@ parameters :
             The first parameter that needs to be entered to drive the method. This might be the first of many.
     db :
         ui-name : |
-            Input viral genome
+            Reference database
         short-hint : |
-            Input viral genome
+            Reference database to de novo cluster proteins against.
         long-hint  : |
             A selected reference database to de novo cluster proteins against. If 'none' is selected, be aware that there will be no references included in the analysis and no taxonomic information.
     pcs_mode :
         ui-name : |
-            Input viral genome
+            PC method
         short-hint : |
-            Input viral genome
+            Protein cluster method to use.
         long-hint  : |
             Whether to use ClusterONE or MCL for Protein Cluster (PC) generation.
     vcs_mode :
         ui-name : |
-            Input viral genome
+            VC method
         short-hint : |
-            Input viral genome
+            Viral cluster method to use.
         long-hint  : |
             Whether to use ClusterONE or MCL for Viral Cluster (VC) generation
     blast_evalue :
         ui-name : |
-            Input viral genome
+            BLASTP evalue cutoff
         short-hint : |
-            Input viral genome
+            BLASTP evalue cutoff for protein-protein network.
         long-hint  : |
             E-value used by BLASTP when creating the protein-protein similarity network.
     pc_inflation :
         ui-name : |
-            Input viral genome
+            MCL inflation for PCs
         short-hint : |
-            Input viral genome
+            MCL inflation value for protein clusters.
         long-hint  : |
             Inflation value to define proteins clusters with MCL. (MCL only)
     pc_max_overlap :
         ui-name : |
-            Input viral genome
+            PC max overlap
         short-hint : |
-            Input viral genome
+            ClusterONE protein cluster max overlap.
         long-hint  : |
             Specifies the maximum allowed overlap between two clusters. (ClusterONE only)
     pc_penalty :
         ui-name : |
-            Input viral genome
+            PC penalty
         short-hint : |
-            Input viral genome
+            ClusterONE protein cluster penalty.
         long-hint  : |
             Sets a penalty value for the inclusion of each node. It can be used to model the possibility of uncharted connections for each node, so nodes with only a single weak connection to a cluster will not be added to the cluster as the penalty value will outweigh the benefits of adding the node. (ClusterONE only)
     pc_haircut :
         ui-name : |
-            Input viral genome
+            PC haircut
         short-hint : |
-            Input viral genome
+            ClusterONE protein cluster haircut to remove dangling nodes.
         long-hint  : |
             Apply a haircut transformation as a post-processing step on the detected clusters. A haircut transformation removes dangling nodes from a cluster. (ClusterONE only)
     vc_inflation :
         ui-name : |
-            Input viral genome
+            MCL inflation for VCs
         short-hint : |
-            Input viral genome
+            MCL inflation value for viral clusters.
         long-hint  : |
             Inflation parameter to define contig clusters with MCL. (MCL only)
     vc_density :
         ui-name : |
-            Input viral genome
+            VC density cutoff
         short-hint : |
-            Input viral genome
+            ClusterONE minimum density per viral cluster
         long-hint  : |
-            Sets the minimum density of predicted complexes. (ClusterONE only)
+            Sets the minimum density of predicted viral clusters. (ClusterONE only)
     vc_min_size :
         ui-name : |
-            Input viral genome
+            VC size cutoff
         short-hint : |
-            Input viral genome
+            Viral cluster minimum size threshold.
         long-hint  : |
             Minimum size for the Viral Cluster.
     vc_max_overlap :
         ui-name : |
-            Input viral genome
+            VC max overlap
         short-hint : |
-            Input viral genome
+            ClusterONE viral cluster max overlap.
         long-hint  : |
             Specifies the maximum allowed overlap between two clusters. (ClusterONE only)
     vc_penalty :
         ui-name : |
-            Input viral genome
+            VC penalty
         short-hint : |
-            Input viral genome
+            ClusterONE viral cluster penalty.
         long-hint  : |
             Sets a penalty value for the inclusion of each node. It can be used to model the possibility of uncharted connections for each node, so nodes with only a single weak connection to a cluster will not be added to the cluster as the penalty value will outweigh the benefits of adding the node. (ClusterONE only)
     vc_haircut :
         ui-name : |
-            Input viral genome
+            VC haircut
         short-hint : |
-            Input viral genome
+            ClusterONE viral cluster haircut to remove dangling nodes.
         long-hint  : |
             Apply a haircut transformation as a post-processing step on the detected clusters. A haircut transformation removes dangling nodes from a cluster. (ClusterONE only)
     merge_method :
         ui-name : |
-            Input viral genome
+            Merge method
         short-hint : |
-            Input viral genome
+            ClusterONE merge method for highly overlapping clusters.
         long-hint  : |
-            Specifies the method to be used to merge highly overlapping complexes. (ClusterONE only)
+            Specifies the method to be used to merge highly overlapping viral clusters. (ClusterONE only)
     similarity :
         ui-name : |
-            Input viral genome
+            Similarity function
         short-hint : |
-            Input viral genome
+            ClusterONE similarity function for merging.
         long-hint  : |
             Specifies the similarity function to be used in the merging step. (ClusterONE only)
     seed_method :
         ui-name : |
-            Input viral genome
+            Seed method
         short-hint : |
-            Input viral genome
+            ClusterONE seed method.
         long-hint  : |
            Specifies the seed generation method to use. (ClusterONE only)
     optimize :
         ui-name : |
-            Input viral genome
+            Optimize distances
         short-hint : |
-            Input viral genome
+            Optimize viral cluster hierarchical distances.
         long-hint  : |
             Optimize hierarchical distances during second-pass of the viral clusters.
     min_significance :
         ui-name : |
-            Input viral genome
+            Min significance
         short-hint : |
-            Input viral genome
+            Minimum significance for genome network.
         long-hint  : |
             Significance threshold in the contig similarity network.
     max_significance :
         ui-name : |
-            Input viral genome
+            Max significance
         short-hint : |
-            Input viral genome
+            Maximum significance for genome network.
         long-hint  : |
             Significance threshold in the contig similarity network.
     permissive :
         ui-name : |
-            Input viral genome
+            Permissive affiliation
         short-hint : |
-            Input viral genome
+            Permissive affiliation for referencing.
         long-hint  : |
             Use permissive affiliation for associating VCs with reference sequences.
     module_inflation :
         ui-name : |
-            Input viral genome
+            Module inflation
         short-hint : |
-            Input viral genome
+            Protein module inflation value.
         long-hint  : |
-            Inflation parameter to define protein modules with MCL.
+            Inflation parameter to define protein modules with MCL. (always uses MCL)
     mod_significance :
         ui-name : |
-            Input viral genome
+            Module significance
         short-hint : |
-            Input viral genome
+            Protein module significance value.
         long-hint  : |
             Significance threshold in the protein cluster similarity network.
     module_min_shared :
         ui-name : |
-            Input viral genome
+            Module shared minimum
         short-hint : |
-            Input viral genome
+            Minimum contigs a PC must be present within to be included.
         long-hint  : |
             Minimal number (inclusive) of contigs a PC must appear into to be taken into account in the modules computing.
     link_significance :
         ui-name : |
-            Input viral genome
+            Link significance
         short-hint : |
-            Input viral genome
+            Threshold to link viral cluster and module.
         long-hint  : |
             Significitaivity threshold to link a cluster and a module.
     link_proportion :
         ui-name : |
-            Input viral genome
+            Link proportion
         short-hint : |
-            Input viral genome
+            Proportion of PCs a viral genome must have to be considered as having the module.
         long-hint  : |
-            Proportion of a module's PC a contig must have to be considered as displaying this module.
+            Proportion of a module's PC a viral genome must have to be considered as displaying this module.
 
 description : |
     <p>vConTACT2 is a tool to perform guilt-by-contig-association automatic classification of viral contigs.</p>
