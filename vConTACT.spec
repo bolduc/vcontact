@@ -5,9 +5,6 @@ A KBase module: vConTACT
 module vConTACT {
     /*
         Insert your typespec information here.
-
-        **ERROR** - KIDL-spec validation failed:
-                Error at line 32, column 9: Can not find type: bool
     */
 
     typedef string obj_ref;
