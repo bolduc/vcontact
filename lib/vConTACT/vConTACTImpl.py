@@ -2,11 +2,11 @@
 #BEGIN_HEADER
 import os
 from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
+from KBaseDataObjectToFileUtils.KBaseDataObjectToFileUtilsClient import KBaseDataObjectToFileUtils as ofu
 from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
 from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 
 #END_HEADER
-
 
 class vConTACT:
     '''
@@ -51,6 +51,10 @@ class vConTACT:
         file = self.gfuclient.genome_to_gff({'genome_ref': params['genome']})
 
         print(file)
+
+        self.ofuclient = ofu(self.callback_url)
+        info = self.ofuclient.GenomeToFASTA({'genome_ref': params['genome']})
+
         vc = vConTACTUtils(self.config)
         vc.vcontact_help()
 
