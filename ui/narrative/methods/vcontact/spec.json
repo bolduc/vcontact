@@ -20,6 +20,419 @@
             "text_options": {
                 "valid_ws_types": ["KBaseGenomeAnnotations.Assembly", "KBaseGenomes.Genome"]
             }
+        },
+        {
+            "id": "db",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "none" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [{
+                    "value": "none",
+                    "display": "Prokaryotic Viral RefSeq version 85 with ICTV-only taxonomy",
+                    "id": "ProkaryoticViralRefSeq85-ICTV",
+                    "ui-name": "ProkaryoticViralRefSeq85-ICTV"
+                },
+                {
+                    "value": "ProkaryoticViralRefSeq85-Merged",
+                    "display": "Prokaryotic Viral RefSeq version 85 with ICTV and NCBI taxonomies",
+                    "id": "ProkaryoticViralRefSeq85-Merged",
+                    "ui-name": "ProkaryoticViralRefSeq85-Merged"
+                },
+                {
+                    "value": "ArchaeaViralRefSeq85-Merged",
+                    "display": "Archaea;-virus only RefSeq version 85 with ICTV and NCBI taxonomies",
+                    "id": "ArchaeaViralRefSeq85-Merged",
+                    "ui-name": "ArchaeaViralRefSeq85-Merged"
+                }]
+            }
+        },
+        {
+            "id": "pcs_mode",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "MCL" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [{
+                    "value": "ClusterONE",
+                    "display": "ClusterONE",
+                    "id": "ClusterONE",
+                    "ui-name": "ClusterONE"
+                },
+                {
+                    "value": "MCL",
+                    "display": "MCL",
+                    "id": "MCL",
+                    "ui-name": "MCL"
+                }]
+            }
+        },
+        {
+            "id": "vcs_mode",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "ClusterONE" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [{
+                    "value": "ClusterONE",
+                    "display": "ClusterONE",
+                    "id": "ClusterONE",
+                    "ui-name": "ClusterONE"
+                },
+                {
+                    "value": "MCL",
+                    "display": "MCL",
+                    "id": "MCL",
+                    "ui-name": "MCL"
+                }]
+            }
+        },
+        {
+            "id": "blast_evalue",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "0.0001" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_integer": 0
+            }
+        },
+        {
+            "id": "pc_inflation",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "2.0" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 10.0
+            }
+        },
+        {
+            "id": "pc_max_overlap",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "0.8" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 1.0
+            }
+        },
+        {
+            "id": "pc_penalty",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "2" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_integer": 0,
+                "max_integer": 10
+            }
+        },
+        {
+            "id": "pc_haircut",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "0.1" ],
+            "field_type": "float",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 1.0
+            }
+        },
+        {
+            "id": "vc_inflation",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "2.0" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 10.0
+            }
+        },
+        {
+            "id": "vc_density",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "0.3" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 1.0
+            }
+        },
+        {
+            "id": "vc_min_size",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "2" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_integer": 1
+            }
+        },
+        {
+            "id": "vc_max_overlap",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "0.9" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 1.0
+            }
+        },
+        {
+            "id": "vc_penalty",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "2" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_integer": 0,
+                "max_integer": 10
+            }
+        },
+        {
+            "id": "vc_haircut",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "0.55" ],
+            "field_type": "float",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 1.0
+            }
+        },
+        {
+            "id": "merge_method",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "single" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [{
+                    "value": "single",
+                    "display": "single",
+                    "id": "single",
+                    "ui-name": "single"
+                },
+                {
+                    "value": "multi",
+                    "display": "multi",
+                    "id": "multi",
+                    "ui-name": "multi"
+                }]
+            }
+        },
+        {
+            "id": "similarity",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "match" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [{
+                    "value": "match",
+                    "display": "match",
+                    "id": "match",
+                    "ui-name": "match"
+                },
+                {
+                    "value": "simpson",
+                    "display": "simpson",
+                    "id": "simpson",
+                    "ui-name": "simpson"
+                },
+                {
+                    "value": "jaccard",
+                    "display": "jaccard",
+                    "id": "jaccard",
+                    "ui-name": "jaccard"
+                },
+                {
+                    "value": "dice",
+                    "display": "dice",
+                    "id": "dice",
+                    "ui-name": "dice"
+                }]
+            }
+        },
+        {
+            "id": "seed_method",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "nodes" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [{
+                    "value": "unused_nodes",
+                    "display": "unused_nodes",
+                    "id": "unused_nodes",
+                    "ui-name": "unused_nodes"
+                },
+                {
+                    "value": "nodes",
+                    "display": "nodes",
+                    "id": "nodes",
+                    "ui-name": "nodes"
+                },
+                {
+                    "value": "edges",
+                    "display": "edges",
+                    "id": "edges",
+                    "ui-name": "edges"
+                },
+                {
+                    "value": "cliques",
+                    "display": "cliques",
+                    "id": "cliques",
+                    "ui-name": "cliques"
+                }]
+            }
+        },
+        {
+            "id": "optimize",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "0" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+                "checked_value": "1",
+                "unchecked_value": "0"
+            }
+        },
+        {
+            "id": "min_significance",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "1.0" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.1
+            }
+        },
+        {
+            "id": "max_significance",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "300" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "max_float": 1000.0
+            }
+        },
+        {
+            "id": "permissive",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "0" ],
+            "field_type": "checkbox",
+            "checkbox_options": {
+                "checked_value": "1",
+                "unchecked_value": "0"
+            }
+        },
+        {
+            "id": "module_inflation",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "5.0" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.0,
+                "max_float": 20.0
+            }
+        },
+        {
+            "id": "mod_significance",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "1.0" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.1
+            }
+        },
+        {
+            "id": "module_min_shared",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "3" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int",
+                "min_int": 3
+            }
+        },
+        {
+            "id": "link_significance",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "1.0" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.1
+            }
+        },
+        {
+            "id": "link_proportion",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float",
+                "min_float": 0.1,
+                "max_float": 1.0
+            }
         }
     ],
     "behavior": {
@@ -35,6 +448,110 @@
                 {
                     "input_parameter": "genome",
                     "target_property": "genome"
+                },
+                {
+                    "input_parameter": "db",
+                    "target_property": "db"
+                },
+                {
+                    "input_parameter": "pcs_mode",
+                    "target_property": "pcs_mode"
+                },
+                {
+                    "input_parameter": "vcs_mode",
+                    "target_property": "vcs_mode"
+                },
+                {
+                    "input_parameter": "blast_evalue",
+                    "target_property": "blast_evalue"
+                },
+                {
+                    "input_parameter": "pc_inflation",
+                    "target_property": "pc_inflation"
+                },
+                {
+                    "input_parameter": "pc_max_overlap",
+                    "target_property": "pc_max_overlap"
+                },
+                {
+                    "input_parameter": "pc_penalty",
+                    "target_property": "pc_penalty"
+                },
+                {
+                    "input_parameter": "pc_haircut",
+                    "target_property": "pc_haircut"
+                },
+                {
+                    "input_parameter": "vc_inflation",
+                    "target_property": "vc_inflation"
+                },
+                {
+                    "input_parameter": "vc_density",
+                    "target_property": "vc_density"
+                },
+                {
+                    "input_parameter": "vc_min_size",
+                    "target_property": "vc_min_size"
+                },
+                {
+                    "input_parameter": "vc_max_overlap",
+                    "target_property": "vc_max_overlap"
+                },
+                {
+                    "input_parameter": "vc_penalty",
+                    "target_property": "vc_penalty"
+                },
+                {
+                    "input_parameter": "vc_haircut",
+                    "target_property": "vc_haircut"
+                },
+                {
+                    "input_parameter": "merge_method",
+                    "target_property": "merge_method"
+                },
+                {
+                    "input_parameter": "similarity",
+                    "target_property": "similarity"
+                },
+                {
+                    "input_parameter": "seed_method",
+                    "target_property": "seed_method"
+                },
+                {
+                    "input_parameter": "optimize",
+                    "target_property": "optimize"
+                },
+                {
+                    "input_parameter": "min_significance",
+                    "target_property": "min_significance"
+                },
+                {
+                    "input_parameter": "max_significance",
+                    "target_property": "max_significance"
+                },
+                {
+                    "input_parameter": "permissive",
+                    "target_property": "permissive"
+                },
+                {
+                    "input_parameter": "module_inflation",
+                    "target_property": "module_inflation"
+                },
+                {
+                    "input_parameter": "mod_significance",
+                    "target_property": "mod_significance"
+                },
+                {
+                    "input_parameter": "module_min_shared",
+                    "target_property": "module_min_shared"
+                },
+                {
+                    "input_parameter": "link_significance",
+                    "target_property": "link_significance"
+                },
+                {
+                    "input_parameter": "link_proportion",
+                    "target_property": "link_proportion"
                 }
             ],
             "output_mapping": [
