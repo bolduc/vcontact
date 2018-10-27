@@ -1,10 +1,12 @@
 import time
 import os
 import subprocess
+import csv
+from collections import OrderedDict
+from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
-import pandas as pd
 
 def log(message, prefix_newline=False):
     """
@@ -48,9 +50,7 @@ class vConTACTUtils:
         """
 
         records = []
-
-        columns = ['contig_id', 'protein_id', 'keywords']
-        gene2genome = pd.DataFrame(columns=columns)
+        gene2genome = OrderedDict()
 
         for item in genome['data']['features']:
             if 'id' not in item:
@@ -65,10 +65,31 @@ class vConTACTUtils:
                     records.append(gene_record)
 
                     # Build gene2genome
-                    gene2genome.loc[len(gene2genome), columns] = [item['id'],
-                                                                  genome['data']['contig_ids'][0],
-                                                                  item['function']]
-        return gene2genome
+                    gene2genome.update({
+                        item['id']: {
+                            'contig_id': genome['data']['contig_ids'][0],
+                            'protein_id': item['id'],
+                            'keywords': item['function']
+                        }
+                    })
+
+        return gene2genome, records
+
+
+    def write_inputs(self, mapping, sequences):
+
+        fasta_for_proteins_fp = os.path.join(self.scratch, 'vConTACT_proteins.fasta')
+        with open(fasta_for_proteins_fp, 'w') as fasta_for_proteins_fh:
+            SeqIO.write(sequences, fasta_for_proteins_fh, 'fasta')
+
+        genes_to_genomes_mapping_fp = os.path.join(self.scratch, 'vConTACT_gene2genome.fasta')
+        with open(genes_to_genomes_mapping_fp, 'w') as genes_to_genomes_mapping_fh:
+            fields = ['contig_id', 'protein_id', 'keywords']
+            writer = csv.DictWriter(genes_to_genomes_mapping_fh, fieldnames=fields)
+            writer.writeheader()
+
+            for gene in mapping.keys():
+                writer.writerow(mapping[gene])
 
     def _mkdir_p(self, path):
         """

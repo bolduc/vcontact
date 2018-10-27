@@ -7,7 +7,7 @@ from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
 from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 
 from GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
-from DataFileUtil.DataFileUtilClient import DataFileUtil
+from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
 
 #END_HEADER
 
@@ -59,7 +59,9 @@ class vConTACT:
         self.genome_api = GenomeAnnotationAPI(self.callback_url)
         genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
 
-        gene2genome = vConTACTUtils.genome_to_inputs(genome_data)
+        gene2genome, sequences = vConTACTUtils.genome_to_inputs(genome_data)
+
+        vConTACTUtils.write_inputs(gene2genome, sequences)
 
         print(gene2genome)
 
