@@ -59,13 +59,14 @@ class vConTACT:
         self.genome_api = GenomeAnnotationAPI(self.callback_url)
         genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
 
-        gene2genome, sequences = vConTACTUtils.genome_to_inputs(genome_data)
+        vc = vConTACTUtils(self.config)
+
+        gene2genome, sequences = vc.genome_to_inputs(genome_data)
 
         vConTACTUtils.write_inputs(gene2genome, sequences)
 
         print(gene2genome)
 
-        vc = vConTACTUtils(self.config)
         vc.vcontact_help()
 
         kbo = KBObjectUtils(self.config)
