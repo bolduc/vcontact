@@ -1,10 +1,10 @@
 import time
 import os
 import subprocess
-import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
+import pandas as pd
 
 def log(message, prefix_newline=False):
     """
