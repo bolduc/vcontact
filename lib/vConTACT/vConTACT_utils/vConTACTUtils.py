@@ -52,11 +52,9 @@ class vConTACTUtils:
         records = []
         gene2genome = OrderedDict()
 
-        print(type(genome))
+        genome_data = genome['genomes'][0]
 
-        print(genome.keys())
-
-        for item in genome['data']['features']:
+        for item in genome_data['data']['features']:
             if 'id' not in item:
                 print('This feature does not have a valid id')
             elif 'dna_sequence' not in item or 'protein_translation' not in item:
@@ -71,7 +69,7 @@ class vConTACTUtils:
                     # Build gene2genome
                     gene2genome.update({
                         item['id']: {
-                            'contig_id': genome['data']['contig_ids'][0],
+                            'contig_id': genome_data['data']['contig_ids'][0],
                             'protein_id': item['id'],
                             'keywords': item['function']
                         }
