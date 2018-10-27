@@ -1,7 +1,10 @@
 import time
 import os
 import subprocess
-
+import pandas as pd
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio.Alphabet import IUPAC
 
 def log(message, prefix_newline=False):
     """
@@ -36,6 +39,36 @@ class vConTACTUtils:
             error_msg = 'Error running command:\n{}\n'.format(command)
             error_msg += 'Exit Code: {}\nOutput:\n{}'.format(exitCode, output)
             raise ValueError(error_msg)
+
+    def genome_to_inputs(self, genome):
+        """
+        genome_to_inputs: convert genome annotation data (~json) to file inputs required by vConTACT
+        :param genome:
+        :return:
+        """
+
+        records = []
+
+        columns = ['contig_id', 'protein_id', 'keywords']
+        gene2genome = pd.DataFrame(columns=columns)
+
+        for item in genome['data']['features']:
+            if 'id' not in item:
+                print('This feature does not have a valid id')
+            elif 'dna_sequence' not in item or 'protein_translation' not in item:
+                print('This feature {} does not have a valid DNA sequence.'.format(item['id']))
+            else:
+                # Create FASTA file
+                if item['type'] == 'gene':
+                    gene_record = SeqRecord(Seq(item['protein_translation'], IUPAC.protein), id=item['id'],
+                                            description=item['function'])
+                    records.append(gene_record)
+
+                    # Build gene2genome
+                    gene2genome.loc[len(gene2genome), columns] = [item['id'],
+                                                                  genome['data']['contig_ids'][0],
+                                                                  item['function']]
+        return gene2genome
 
     def _mkdir_p(self, path):
         """
