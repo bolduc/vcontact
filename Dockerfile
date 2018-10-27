@@ -38,8 +38,6 @@ RUN wget --no-verbose http://github.com/bbuchfink/diamond/releases/download/v0.9
 RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
 chmod +x /usr/local/bin/cluster_one-1.0.sh
 
-RUN pip install pandas
-
 # -----------------------------------------
 
 COPY ./ /kb/module

@@ -7,6 +7,7 @@ from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
 from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 
 from GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
+from DataFileUtil.DataFileUtilClient import DataFileUtil
 
 #END_HEADER
 
