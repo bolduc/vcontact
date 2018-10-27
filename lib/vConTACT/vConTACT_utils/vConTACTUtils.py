@@ -52,6 +52,10 @@ class vConTACTUtils:
         records = []
         gene2genome = OrderedDict()
 
+        print(type(genome))
+
+        print(genome.keys())
+
         for item in genome['data']['features']:
             if 'id' not in item:
                 print('This feature does not have a valid id')
