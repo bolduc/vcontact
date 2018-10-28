@@ -92,7 +92,7 @@ class vConTACTTest(unittest.TestCase):
             'vc_density': '0.3',
             'vc_min_size': '2',
             'vc_max_overlap': '0.9',
-            'vc_penalty': '2.0',
+            'vc_penalty': '2',
             'vc_haircut': '0.55',
             'merge_method': 'single',
             'similarity': 'match',
