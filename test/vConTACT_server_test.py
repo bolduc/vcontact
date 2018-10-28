@@ -77,7 +77,34 @@ class vConTACTTest(unittest.TestCase):
 
     # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
     def test_run_vcontact(self):
-        ret = self.getImpl().run_vcontact(self.getContext(), {'workspace_name': self.getWsName(), 'genome': '21695/4/1'})
+        ret = self.getImpl().run_vcontact(self.getContext(), {
+            'workspace_name': self.getWsName(),
+            'genome': '21695/4/1',
+            'db': 'ProkaryoticViralRefSeq85-Merged',
+            'pcs_mode': 'MCL',
+            'vcs_mode': 'ClusterONE',
+            'blast_evalue': '0.0001',
+            'pc_max_overlap': '0.8',
+            'pc_penalty': '2.0',
+            'pc_haircut': '0.1',
+            'pc_inflation': '2.0',
+            'vc_inflation': '2.0',
+            'vc_density': '0.3',
+            'vc_min_size': '2',
+            'vc_max_overlap': '0.9',
+            'vc_penalty': '2.0',
+            'vc_haircut': '0.55',
+            'merge_method': 'single',
+            'similarity': 'match',
+            'seed_method': 'nodes',
+            'min_significance': '1.0',
+            'max_significance': '300',
+            'module_inflation': '5.0',
+            'mod_significance': '1.0',
+            'module_min_shared': '3',
+            'link_significance': '1.0',
+            'link_proportion': '0.5'
+        })
         #
         # Check returned data with
         # self.assertEqual(ret[...], ...) or other unittest methods

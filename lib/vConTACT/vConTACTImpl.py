@@ -50,22 +50,21 @@ class vConTACT:
         # ctx is the context object
         #BEGIN run_vcontact
         self.callback_url = os.environ['SDK_CALLBACK_URL']
-        self.gfuclient = gfu(self.callback_url)
-        genome = params['genome']
-        file = self.gfuclient.genome_to_gff({'genome_ref':genome})
-
-        print(file)
-
-        self.genome_api = GenomeAnnotationAPI(self.callback_url)
-        genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
 
         vc = vConTACTUtils(self.config)
 
+        self.genome_api = GenomeAnnotationAPI(self.callback_url)
+        genome = params['genome']
+        genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
+
         gene2genome, sequences = vc.genome_to_inputs(genome_data)
 
-        vc.write_inputs(gene2genome, sequences)
+        gene2genome_fp, sequences_fp = vc.write_inputs(gene2genome, sequences)
 
-        print(gene2genome)
+        params['gene2genome'] = gene2genome_fp
+        params['sequences'] = sequences_fp
+
+        returnVal = vc.run_vcontact(params)
 
         vc.vcontact_help()
 

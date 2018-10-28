@@ -8,6 +8,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
 
+
 def log(message, prefix_newline=False):
     """
     Logging function, provides a hook to suppress or redirect log messages.
@@ -22,6 +23,50 @@ class vConTACTUtils:
 
     def vcontact_help(self):
         command = "vcontact --help"
+        self._run_command(command)
+
+    def run_vcontact(self, params):
+
+        #
+        mappings = {
+            'gene2genome': '--proteins-fp',
+            'sequences': '--raw-proteins',
+            'db': '--db',
+            'pcs_mode': '--pcs-mode',
+            'vcs_mode': '--vcs-mode',
+            'blast_evalue': '--blast-evalue',
+            'pc_max_overlap': '--max-overlap',
+            'pc_penalty': '--penalty',
+            'pc_haircut': '--haircut',
+            'pc_inflation': '--pc-inflation',
+            'vc_inflation': '--vc-inflation',
+            'vc_density': '--min-density',
+            'vc_min_size': '--min-size',
+            'vc_max_overlap': '--vc-overlap',
+            'vc_penalty': '--vc-penalty',
+            'vc_haircut': '--vc-haircut',
+            'merge_method': '--merge-method',
+            'similarity': '--similarity',
+            'seed_method': '--seed-method',
+            'min_significance': '--sig',
+            'max_significance': '--max-sig',
+            'module_inflation': '--mod-inflation',
+            'mod_significance': '--mod-sig',
+            'module_min_shared': '--mod-shared-min',
+            'link_significance': '--link-sig',
+            'link_proportion': '--link-prop'
+        }
+
+        bool_args = ['optimize', 'permissive']
+
+        # Should create build_command?
+        command = 'vcontact'
+        # Binaries
+        command += ' --diamond-bin /usr/local/bin/diamond --c1-bin /usr/local/bin/cluster_one-1.0.jar'
+
+        for param, cmd in mappings.items():
+            command += ' {} {}'.format(cmd, params[param])
+
         self._run_command(command)
 
     def _run_command(self, command):
@@ -77,7 +122,6 @@ class vConTACTUtils:
 
         return gene2genome, records
 
-
     def write_inputs(self, mapping, sequences):
 
         fasta_for_proteins_fp = os.path.join(self.scratch, 'vConTACT_proteins.fasta')
@@ -92,6 +136,8 @@ class vConTACTUtils:
 
             for gene in mapping.keys():
                 writer.writerow(mapping[gene])
+
+        return genes_to_genomes_mapping_fp, fasta_for_proteins_fp
 
     def _mkdir_p(self, path):
         """
