@@ -85,7 +85,7 @@ class vConTACTTest(unittest.TestCase):
             'vcs_mode': 'ClusterONE',
             'blast_evalue': '0.0001',
             'pc_max_overlap': '0.8',
-            'pc_penalty': '2.0',
+            'pc_penalty': '2',
             'pc_haircut': '0.1',
             'pc_inflation': '2.0',
             'vc_inflation': '2.0',
