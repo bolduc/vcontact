@@ -60,7 +60,7 @@ class vConTACTUtils:
         bool_args = ['optimize', 'permissive']
 
         # Should create build_command?
-        command = 'vcontact'
+        command = 'vcontact --output-dir outdir'
         # Binaries
         command += ' --diamond-bin /usr/local/bin/diamond --c1-bin /usr/local/bin/cluster_one-1.0.jar'
 
