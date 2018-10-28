@@ -128,7 +128,7 @@ class vConTACTUtils:
         with open(fasta_for_proteins_fp, 'w') as fasta_for_proteins_fh:
             SeqIO.write(sequences, fasta_for_proteins_fh, 'fasta')
 
-        genes_to_genomes_mapping_fp = os.path.join(self.scratch, 'vConTACT_gene2genome.fasta')
+        genes_to_genomes_mapping_fp = os.path.join(self.scratch, 'vConTACT_gene2genome.csv')
         with open(genes_to_genomes_mapping_fp, 'w') as genes_to_genomes_mapping_fh:
             fields = ['contig_id', 'protein_id', 'keywords']
             writer = csv.DictWriter(genes_to_genomes_mapping_fh, fieldnames=fields)
