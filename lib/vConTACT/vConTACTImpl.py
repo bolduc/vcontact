@@ -70,11 +70,9 @@ class vConTACT:
         params['gene2genome'] = gene2genome_fp
         params['sequences'] = sequences_fp
 
-        pass
+        returnVal = vc.run_vcontact(params)
 
-        # returnVal = vc.run_vcontact(params)
-
-        vc.vcontact_help()
+        # vc.vcontact_help()
 
         kbo = KBObjectUtils(self.config)
         kbo.create_report(params['workspace_name'])

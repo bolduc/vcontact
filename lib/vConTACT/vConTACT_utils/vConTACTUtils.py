@@ -101,8 +101,10 @@ class vConTACTUtils:
 
         for item in genome_data['data']['features']:
             if 'id' not in item:
+                continue
                 print('This feature does not have a valid id')
             elif 'dna_sequence' not in item or 'protein_translation' not in item:
+                continue
                 print('This feature {} does not have a valid DNA sequence.'.format(item['id']))
             else:
                 # Create FASTA file
