@@ -70,7 +70,7 @@ class vConTACT:
         params['gene2genome'] = gene2genome_fp
         params['sequences'] = sequences_fp
 
-        returnVal = vc.run_vcontact(params)
+        # returnVal = vc.run_vcontact(params)
 
         vc.vcontact_help()
 
