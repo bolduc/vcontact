@@ -63,6 +63,8 @@ class vConTACT:
         print('Genome data')
         print(genome_data)
 
+        exit()
+
         gene2genome, sequences = vc.genome_to_inputs(genome_data)
 
         gene2genome_fp, sequences_fp = vc.write_inputs(gene2genome, sequences)
