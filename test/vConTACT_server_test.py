@@ -81,7 +81,7 @@ class vConTACTTest(unittest.TestCase):
             'workspace_name': self.getWsName(),
             # 'genome': '21695/4/1',
             'genome': '7585/2/1',
-            'db': 'ProkaryoticViralRefSeq85-Merged',
+            'db': 'ArchaeaViralRefSeq85-Merged',
             'pcs_mode': 'MCL',
             'vcs_mode': 'ClusterONE',
             'blast_evalue': '0.0001',
