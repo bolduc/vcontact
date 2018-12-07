@@ -60,6 +60,9 @@ class vConTACT:
 
         genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
 
+        print('Genome data')
+        print(genome_data)
+
         gene2genome, sequences = vc.genome_to_inputs(genome_data)
 
         gene2genome_fp, sequences_fp = vc.write_inputs(gene2genome, sequences)
