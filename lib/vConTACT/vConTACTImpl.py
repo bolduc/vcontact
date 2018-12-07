@@ -56,12 +56,7 @@ class vConTACT:
         self.genome_api = GenomeAnnotationAPI(self.callback_url)
         genome = params['genome']
 
-        print('Genome is: {}'.format(genome))
-
         genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
-
-        # print('Genome data')
-        # print(genome_data)
 
         gene2genome, sequences = vc.genome_to_inputs(genome_data)
 
