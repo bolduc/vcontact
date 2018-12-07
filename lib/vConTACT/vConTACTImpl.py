@@ -60,10 +60,8 @@ class vConTACT:
 
         genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
 
-        print('Genome data')
-        print(genome_data)
-
-        exit()
+        # print('Genome data')
+        # print(genome_data)
 
         gene2genome, sequences = vc.genome_to_inputs(genome_data)
 
@@ -71,6 +69,8 @@ class vConTACT:
 
         params['gene2genome'] = gene2genome_fp
         params['sequences'] = sequences_fp
+
+        pass
 
         # returnVal = vc.run_vcontact(params)
 

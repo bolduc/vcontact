@@ -114,7 +114,8 @@ class vConTACTUtils:
                     # Build gene2genome
                     gene2genome.update({
                         item['id']: {
-                            'contig_id': genome_data['data']['contig_ids'][0],
+                            # 'contig_id': genome_data['data']['contig_ids'][0],
+                            'contig_id': genome_data['data']['location'][0][0],
                             'protein_id': item['id'],
                             'keywords': item['function']
                         }
