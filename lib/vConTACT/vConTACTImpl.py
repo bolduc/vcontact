@@ -9,6 +9,8 @@ from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 from GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
 from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
 
+import pandas as pd
+
 #END_HEADER
 
 class vConTACT:
