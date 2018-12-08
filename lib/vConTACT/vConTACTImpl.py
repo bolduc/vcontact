@@ -69,6 +69,8 @@ class vConTACT:
         params['sequences'] = sequences_fp
         returnVal = vc.run_vcontact(params)
 
+        print('Location of ' + params['gene2genome'])
+
         vc._generate_report(params)
 
         # vc.vcontact_help()
