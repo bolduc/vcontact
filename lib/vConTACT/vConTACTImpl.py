@@ -50,6 +50,7 @@ class vConTACT:
         # ctx is the context object
         #BEGIN run_vcontact
         self.callback_url = os.environ['SDK_CALLBACK_URL']
+        params['SDK_CALLBACK_URL'] = self.callback_url
 
         vc = vConTACTUtils(self.config)
 
@@ -58,14 +59,16 @@ class vConTACT:
 
         genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
 
+        # Convert genome data into "reasonable" parse form and write to scratch filesystem
         gene2genome, sequences = vc.genome_to_inputs(genome_data)
-
         gene2genome_fp, sequences_fp = vc.write_inputs(gene2genome, sequences)
 
+        # Pass locations to the app and run
         params['gene2genome'] = gene2genome_fp
         params['sequences'] = sequences_fp
-
         returnVal = vc.run_vcontact(params)
+
+        vc._generate_report(params)
 
         # vc.vcontact_help()
 

@@ -7,6 +7,9 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
+import pandas as pd
+
+from KBaseReport.KBaseReportClient import KBaseReport
 
 
 def log(message, prefix_newline=False):
@@ -20,6 +23,9 @@ class vConTACTUtils:
 
     def __init__(self, config):
         self.scratch = os.path.abspath(config['scratch'])
+        self.token = config['KB_AUTH_TOKEN']
+        self.callback_url = config['SDK_CALLBACK_URL']
+        self.workspace_name = config['workspace_name']
 
     def vcontact_help(self):
         command = "vcontact --help"
@@ -141,6 +147,37 @@ class vConTACTUtils:
                 writer.writerow(mapping[gene])
 
         return genes_to_genomes_mapping_fp, fasta_for_proteins_fp
+
+    def _generate_report(self, matrix_obj_ref):
+        """
+        _generate_report: generate summary report
+
+        This will contain ALL the logic to generate the report, including areas that should/will be re-factored later
+
+        """
+
+        # Get filepath of summary file
+        summary_fp = os.path.join(self.scratch, 'outdir', 'node_table_summary.csv')
+
+        summary_df = pd.read_csv(summary_fp, header=0, index_col=0)
+        html = summary_df.to_html(index=False, classes='my_class" id = "my_id')
+
+        print(html)
+
+        exit()
+
+        report_params = {'message': '',
+                         'objects_created': [{'ref': matrix_obj_ref,
+                                              'description': 'Imported Matrix'}],
+                         'workspace_name': self.workspace_name,
+                         'report_object_name': 'import_matrix_from_excel_'}
+
+        kbase_report_client = KBaseReport(self.callback_url, token=self.token)
+        output = kbase_report_client.create_extended_report(report_params)
+
+        report_output = {'report_name': output['name'], 'report_ref': output['ref']}
+
+        return report_output
 
     def _mkdir_p(self, path):
         """
