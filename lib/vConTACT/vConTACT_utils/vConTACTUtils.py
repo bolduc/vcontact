@@ -154,7 +154,7 @@ class vConTACTUtils:
         """
 
         # Get filepath of summary file
-        summary_fp = os.path.join(self.scratch, 'outdir', 'node_table_summary.csv')
+        summary_fp = os.path.join(os.getcwd(), 'outdir', 'node_table_summary.csv')
 
         print(os.listdir(os.path.join(self.scratch)))
         print('Output directory contains:',  os.listdir('outdir/'))
