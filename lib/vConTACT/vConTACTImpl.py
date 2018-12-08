@@ -51,6 +51,7 @@ class vConTACT:
         #BEGIN run_vcontact
         self.callback_url = os.environ['SDK_CALLBACK_URL']
         params['SDK_CALLBACK_URL'] = self.callback_url
+        print(os.environ)
         params['KB_SERVICE_TOKEN'] = os.environ['KB_SERVICE_TOKEN']
         self.workspace_name = params['workspace_name']
 
