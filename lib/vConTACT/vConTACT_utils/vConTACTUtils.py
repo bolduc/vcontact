@@ -7,7 +7,7 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
-import pandas as pd
+# import pandas as pd
 
 from KBaseReport.KBaseReportClient import KBaseReport
 
