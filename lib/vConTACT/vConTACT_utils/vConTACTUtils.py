@@ -145,7 +145,7 @@ class vConTACTUtils:
 
         return genes_to_genomes_mapping_fp, fasta_for_proteins_fp
 
-    def _generate_report(self, matrix_obj_ref):
+    def _generate_report(self, params):
         """
         _generate_report: generate summary report
 

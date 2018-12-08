@@ -51,13 +51,9 @@ class vConTACT:
         #BEGIN run_vcontact
         self.callback_url = os.environ['SDK_CALLBACK_URL']
         params['SDK_CALLBACK_URL'] = self.callback_url
-        print(os.environ)
-        params['KB_SERVICE_TOKEN'] = os.environ['KB_SERVICE_TOKEN']
-        self.workspace_name = params['workspace_name']
+        params['KB_AUTH_TOKEN'] = os.environ['KB_AUTH_TOKEN']
 
         vc = vConTACTUtils(self.config)
-
-        print(self.config)
 
         self.genome_api = GenomeAnnotationAPI(self.callback_url)
         genome = params['genome']
