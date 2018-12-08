@@ -51,6 +51,8 @@ class vConTACT:
         #BEGIN run_vcontact
         self.callback_url = os.environ['SDK_CALLBACK_URL']
         params['SDK_CALLBACK_URL'] = self.callback_url
+        self.token = params['KB_AUTH_TOKEN']
+        self.workspace_name = params['workspace_name']
 
         vc = vConTACTUtils(self.config)
 
