@@ -6,10 +6,11 @@ MAINTAINER KBase Developer
 # install line here, a git checkout to download code, or run any other
 # installation scripts.
 
-# RUN apt-get update
 RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
 
 ENV PATH="/usr/local/bin:${PATH}"
+
+RUN pip install pandas
 
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
  bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/ && \
@@ -37,8 +38,6 @@ RUN wget --no-verbose http://github.com/bbuchfink/diamond/releases/download/v0.9
 
 RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
 chmod +x /usr/local/bin/cluster_one-1.0.sh
-
-RUN pip install pandas
 
 # -----------------------------------------
 
