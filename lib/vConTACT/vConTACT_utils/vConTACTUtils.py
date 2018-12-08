@@ -157,8 +157,7 @@ class vConTACTUtils:
         summary_fp = os.path.join(self.scratch, 'outdir', 'node_table_summary.csv')
 
         print(os.listdir(os.path.join(self.scratch)))
-        print(os.listdir(os.path.join(self.scratch, 'outdir')))
-        print(os.listdir('outdir/'))
+        print('Output directory contains:',  os.listdir('outdir/'))
 
         summary_df = pd.read_csv(summary_fp, header=0, index_col=0)
         html = summary_df.to_html(index=False, classes='my_class" id = "my_id')
