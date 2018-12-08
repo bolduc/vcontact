@@ -54,6 +54,8 @@ class vConTACT:
 
         vc = vConTACTUtils(self.config)
 
+        print(self.config)
+
         self.genome_api = GenomeAnnotationAPI(self.callback_url)
         genome = params['genome']
 

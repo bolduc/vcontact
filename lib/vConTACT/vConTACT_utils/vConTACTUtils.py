@@ -23,7 +23,7 @@ class vConTACTUtils:
 
     def __init__(self, config):
         self.scratch = os.path.abspath(config['scratch'])
-        self.token = config['KB_AUTH_TOKEN']
+        # self.token = config['KB_AUTH_TOKEN']
         self.callback_url = config['SDK_CALLBACK_URL']
         self.workspace_name = config['workspace_name']
 
