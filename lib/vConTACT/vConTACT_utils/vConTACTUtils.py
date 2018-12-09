@@ -201,7 +201,7 @@ class vConTACTUtils:
                          # Don't use until have files to attach to report
                          # 'file_links': [{}],
                          # Raw HTML
-                         'direct_html': [direct_html],
+                         'direct_html': direct_html,
                          'workspace_name': params['workspace_name'],
                          # 'html_links': [html_dir],
                          'direct_html_link_index': 0,
