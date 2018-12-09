@@ -36,8 +36,8 @@ html_template = Template("""<!DOCTYPE html>
     </div>
 
     <script type="text/javascript">
-      $(document).ready(function() {
-          $('#my_id').DataTable();
+      $$(document).ready(function() {
+          $$('#my_id').DataTable();
       } );
       </script>
   </body>
