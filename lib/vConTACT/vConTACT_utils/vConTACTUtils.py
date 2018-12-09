@@ -7,6 +7,7 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
+from string import Template
 import pandas as pd
 
 from KBaseReport.KBaseReportClient import KBaseReport
@@ -17,6 +18,30 @@ def log(message, prefix_newline=False):
     Logging function, provides a hook to suppress or redirect log messages.
     """
     print(('\n' if prefix_newline else '') + '{0:.2f}'.format(time.time()) + ': ' + str(message))
+
+
+html_template = Template("""<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        ${html_table}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('#my_id').DataTable();
+      } );
+      </script>
+  </body>
+</html>""")
 
 
 class vConTACTUtils:
@@ -156,23 +181,33 @@ class vConTACTUtils:
         # Get filepath of summary file
         summary_fp = os.path.join(os.getcwd(), 'outdir', 'node_table_summary.csv')
 
-        print(os.listdir(os.path.join(self.scratch)))
-        print('Output directory contains:',  os.listdir('outdir/'))
-
         summary_df = pd.read_csv(summary_fp, header=0, index_col=0)
         html = summary_df.to_html(index=False, classes='my_class" id = "my_id')
 
-        print(html)
+        # Need to file write below
+        direct_html = html_template.substitute(html_table=html)
 
-        exit()
+        # html_dir = {
+        #     'path': html_dir_path,
+        #     'name': 'index.html',  # MUST match the filename of your main html page
+        #     'description': 'My HTML report'
+        # }
 
-        report_params = {'message': '',
-                         'objects_created': [{'ref': matrix_obj_ref,
-                                              'description': 'Imported Matrix'}],
-                         'workspace_name': self.workspace_name,
-                         'report_object_name': 'import_matrix_from_excel_'}
+        report_params = {'message': 'Basic message to show in the report',
+                         'report_object_name': 'import_matrix_from_excel_',
+                         # Don't use until data objects that are created as result of running app
+                         # 'objects_created': [{'ref': matrix_obj_ref,
+                         #                      'description': 'Imported Matrix'}],
+                         # Don't use until have files to attach to report
+                         # 'file_links': [{}],
+                         # Raw HTML
+                         'direct_html': [direct_html],
+                         'workspace_name': params['workspace_name'],
+                         # 'html_links': [html_dir],
+                         'direct_html_link_index': 0,
+                         }
 
-        kbase_report_client = KBaseReport(self.callback_url, token=self.token)
+        kbase_report_client = KBaseReport(params['SDK_CALLBACK_URL'], token=params['KB_AUTH_TOKEN'])
         output = kbase_report_client.create_extended_report(report_params)
 
         report_output = {'report_name': output['name'], 'report_ref': output['ref']}
