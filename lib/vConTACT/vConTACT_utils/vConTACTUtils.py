@@ -2,6 +2,7 @@ import time
 import os
 import subprocess
 import csv
+import uuid
 from collections import OrderedDict
 from Bio import SeqIO
 from Bio.Seq import Seq
@@ -10,6 +11,7 @@ from Bio.Alphabet import IUPAC
 from string import Template
 import pandas as pd
 
+from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
 from KBaseReport.KBaseReportClient import KBaseReport
 
 
@@ -48,6 +50,7 @@ class vConTACTUtils:
 
     def __init__(self, config):
         self.scratch = os.path.abspath(config['scratch'])
+        self.dfu = dfu(config['SDK_CALLBACK_URL'])
 
     def vcontact_help(self):
         command = "vcontact --help"
@@ -187,6 +190,25 @@ class vConTACTUtils:
         # Need to file write below
         direct_html = html_template.substitute(html_table=html)
 
+        output_dir = os.path.join(self.scratch, str(uuid.uuid4()))
+        self._mkdir_p(output_dir)
+        result_fp = os.path.join(output_dir, 'index.html')
+
+        with open(result_fp, 'w') as result_fh:
+            result_fh.write(direct_html)
+
+        report_shock_id = self.dfu.file_to_shock({
+            'file_path': output_dir,
+            'pack': 'zip'
+        })['shock_id']
+
+        html_report = {
+            'shock_id': report_shock_id,
+            'name': os.path.basename(result_fp),
+            'label': os.path.basename(result_fp),
+            'description': 'HTML summary report for vConTACT2'
+        }
+
         # html_dir = {
         #     'path': html_dir_path,
         #     'name': 'index.html',  # MUST match the filename of your main html page
@@ -201,9 +223,9 @@ class vConTACTUtils:
                          # Don't use until have files to attach to report
                          # 'file_links': [{}],
                          # Raw HTML
-                         'direct_html': direct_html,
+                         # 'direct_html': direct_html,
                          'workspace_name': params['workspace_name'],
-                         # 'html_links': [html_dir],
+                         'html_links': [html_report],
                          'direct_html_link_index': 0,
                          }
 
