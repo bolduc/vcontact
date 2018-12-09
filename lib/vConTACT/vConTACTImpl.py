@@ -69,12 +69,12 @@ class vConTACT:
         params['sequences'] = sequences_fp
         returnVal = vc.run_vcontact(params)
 
-        vc._generate_report(params)
+        another_returnVal = vc._generate_report(params)
 
         # vc.vcontact_help()
 
-        kbo = KBObjectUtils(self.config)
-        kbo.create_report(params['workspace_name'])
+        # kbo = KBObjectUtils(self.config)
+        # kbo.create_report(params['workspace_name'])
 
         #END run_vcontact
         pass

@@ -218,7 +218,7 @@ class vConTACTUtils:
         # }
 
         report_params = {'message': 'Basic message to show in the report',
-                         'report_object_name': 'import_matrix_from_excel_',
+                         'report_object_name': 'vConTACT_report_{}'.format(str(uuid.uuid4())),
                          # Don't use until data objects that are created as result of running app
                          # 'objects_created': [{'ref': matrix_obj_ref,
                          #                      'description': 'Imported Matrix'}],
