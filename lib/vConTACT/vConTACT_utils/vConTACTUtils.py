@@ -50,7 +50,6 @@ class vConTACTUtils:
 
     def __init__(self, config):
         self.scratch = os.path.abspath(config['scratch'])
-        self.dfu = dfu(config['SDK_CALLBACK_URL'])
 
     def vcontact_help(self):
         command = "vcontact --help"
@@ -180,6 +179,9 @@ class vConTACTUtils:
         This will contain ALL the logic to generate the report, including areas that should/will be re-factored later
 
         """
+
+        # Get
+        self.dfu = dfu(params['SDK_CALLBACK_URL'])
 
         # Get filepath of summary file
         summary_fp = os.path.join(os.getcwd(), 'outdir', 'node_table_summary.csv')
