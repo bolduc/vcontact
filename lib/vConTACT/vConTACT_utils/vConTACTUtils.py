@@ -101,7 +101,7 @@ class vConTACTUtils:
 
         report = self._generate_report(params)
 
-        return [report]
+        return report
 
     def _run_command(self, command):
         """
@@ -208,31 +208,23 @@ class vConTACTUtils:
             'pack': 'zip'
         })['shock_id']
 
-        html_report = {
+        html_report = [{
             'shock_id': report_shock_id,
             'name': os.path.basename(result_fp),
             'label': os.path.basename(result_fp),
             'description': 'HTML summary report for vConTACT2'
-        }
-
-        # html_dir = {
-        #     'path': html_dir_path,
-        #     'name': 'index.html',  # MUST match the filename of your main html page
-        #     'description': 'My HTML report'
-        # }
+        }]
 
         report_params = {'message': 'Basic message to show in the report',
+                         'workspace_name': params['workspace_name'],
+                         'html_links': html_report,
+                         'direct_html_link_index': 0,
                          'report_object_name': 'vConTACT_report_{}'.format(str(uuid.uuid4())),
+                         # Don't use until have files to attach to report
+                         # 'file_links': [{}],
                          # Don't use until data objects that are created as result of running app
                          # 'objects_created': [{'ref': matrix_obj_ref,
                          #                      'description': 'Imported Matrix'}],
-                         # Don't use until have files to attach to report
-                         # 'file_links': [{}],
-                         # Raw HTML
-                         # 'direct_html': direct_html,
-                         'workspace_name': params['workspace_name'],
-                         'html_links': [html_report],
-                         'direct_html_link_index': 0,
                          }
 
         kbase_report_client = KBaseReport(params['SDK_CALLBACK_URL'], token=params['KB_AUTH_TOKEN'])

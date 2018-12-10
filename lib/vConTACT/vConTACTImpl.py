@@ -72,7 +72,7 @@ class vConTACT:
         # kbo = KBObjectUtils(self.config)
         # kbo.create_report(params['workspace_name'])
 
-        return returnVal
+        return [returnVal]
 
         #END run_vcontact
         pass
