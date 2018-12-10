@@ -26,11 +26,11 @@
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "none" ],
+            "default_values": [ "ProkaryoticViralRefSeq85-ICTV" ],
             "field_type": "dropdown",
             "dropdown_options": {
                 "options": [{
-                    "value": "none",
+                    "value": "ProkaryoticViralRefSeq85-ICTV",
                     "display": "Prokaryotic Viral RefSeq version 85 with ICTV-only taxonomy",
                     "id": "ProkaryoticViralRefSeq85-ICTV",
                     "ui-name": "ProkaryoticViralRefSeq85-ICTV"
