@@ -23,7 +23,7 @@ RUN conda install -y -c conda-forge hdf5 pytables pypandoc biopython networkx nu
 RUN pip install setuptools-markdown
 
 RUN git clone https://bolduc@bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && \
-pip install --no-dependencies .
+ pip install --no-dependencies .
 
 RUN wget http://micans.org/mcl/src/mcl-latest.tar.gz && \
  tar xf mcl-latest.tar.gz && cd mcl-14-137 && ./configure --prefix /usr/local/ && make install && \
@@ -37,8 +37,8 @@ RUN wget --no-verbose ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/
 
 #RUN wget --no-verbose http://github.com/bbuchfink/diamond/releases/download/v0.9.10/diamond-linux64.tar.gz && \
 # tar xf diamond-linux64.tar.gz && cp diamond /usr/local/bin && rm -rf diamond-linux64.tar.gz
-RUN wget http://github.com/bbuchfink/diamond/archive/v0.9.23.tar.gz && tar xzf v0.9.23.tar.gz && cd diamond-0.9.23 && \
-mkdir bin && cd bin && cmake .. && make install
+RUN git clone https://github.com/bbuchfink/diamond && cd diamond && sed 's/g++/g++ -std=c++11/' build_simple.sh > tmp && \
+ chmod u+x tmp && mv tmp rebuild_simple.sh && ./rebuild_simple.sh && mv diamond /kb/deployment/bin/diamond
 
 RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
 chmod +x /usr/local/bin/cluster_one-1.0.sh
