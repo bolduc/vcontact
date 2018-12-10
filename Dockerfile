@@ -8,7 +8,7 @@ MAINTAINER KBase Developer
 
 RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
 
-RUN add-apt-repository ppa:george-edison55/cmake-3.x && apt-get update && apt-get install cmake
+RUN add-apt-repository ppa:george-edison55/cmake-3.x && apt-get update && apt-get install -y cmake
 
 ENV PATH="/usr/local/bin:${PATH}"
 
