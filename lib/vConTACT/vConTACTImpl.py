@@ -67,14 +67,12 @@ class vConTACT:
         # Pass locations to the app and run
         params['gene2genome'] = gene2genome_fp
         params['sequences'] = sequences_fp
-        returnVal = vc.run_vcontact(params)
-
-        another_returnVal = vc._generate_report(params)
-
-        # vc.vcontact_help()
+        returnVal = vc.run_vcontact(params)  # Output
 
         # kbo = KBObjectUtils(self.config)
         # kbo.create_report(params['workspace_name'])
+
+        return returnVal
 
         #END run_vcontact
         pass

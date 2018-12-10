@@ -99,6 +99,10 @@ class vConTACTUtils:
 
         self._run_command(command)
 
+        report = self._generate_report(params)
+
+        return [report]
+
     def _run_command(self, command):
         """
         _run_command: run command and print result
