@@ -46,6 +46,12 @@
                     "display": "Archaeal-virus only RefSeq version 85 with ICTV and NCBI taxonomies",
                     "id": "ArchaeaViralRefSeq85-Merged",
                     "ui-name": "ArchaeaViralRefSeq85-Merged"
+                },
+                {
+                    "value": "ProkaryoticViralRefSeq88-Merged",
+                    "display": "Prokaryotic Viral RefSeq version 88 with ICTV and NCBI taxonomies",
+                    "id": "ProkaryoticViralRefSeq88-Merged",
+                    "ui-name": "ProkaryoticViralRefSeq88-Merged"
                 }]
             }
         },
