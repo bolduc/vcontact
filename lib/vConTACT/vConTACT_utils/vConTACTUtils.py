@@ -188,7 +188,7 @@ class vConTACTUtils:
         self.dfu = dfu(params['SDK_CALLBACK_URL'])
 
         # Get filepath of summary file
-        summary_fp = os.path.join(os.getcwd(), 'outdir', 'node_table_summary.csv')
+        summary_fp = os.path.join(os.getcwd(), 'outdir', 'genome_by_genome_overview.csv')
 
         summary_df = pd.read_csv(summary_fp, header=0, index_col=0)
         html = summary_df.to_html(index=False, classes='my_class" id = "my_id')

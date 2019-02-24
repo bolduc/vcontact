@@ -19,26 +19,18 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh &
  rm Miniconda3-latest-Linux-x86_64.sh
 
 RUN conda install -y -c conda-forge hdf5 pytables pypandoc biopython networkx numpy pandas scipy scikit-learn psutil
+RUN conda install -y -c bioconda mcl blast diamond
+
+RUN conda clean --yes --tarballs --packages --source-cache
 
 RUN pip install setuptools-markdown
 
 RUN git clone https://bolduc@bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && \
- pip install --no-dependencies .
+ pip install .
 
-RUN wget http://micans.org/mcl/src/mcl-latest.tar.gz && \
- tar xf mcl-latest.tar.gz && cd mcl-14-137 && ./configure --prefix /usr/local/ && make install && \
- rm -rf /mcl-latest.tar.gz
+RUN cp vcontact2/vcontact/data/ViralRefSeq-prokaryotes-v8?.* /usr/local/lib/python3.7/site-packages/vcontact/data/
 
 RUN wget http://www.paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar -P /usr/local/bin
-
-RUN wget --no-verbose ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-x64-linux.tar.gz && \
- tar xf ncbi-blast-2.6.0+-x64-linux.tar.gz && cd ncbi-blast-2.6.0+ && \
- cp bin/* /usr/local/bin && cd / && rm -rf ncbi-blast-2.6.0+*
-
-#RUN wget --no-verbose http://github.com/bbuchfink/diamond/releases/download/v0.9.10/diamond-linux64.tar.gz && \
-# tar xf diamond-linux64.tar.gz && cp diamond /usr/local/bin && rm -rf diamond-linux64.tar.gz
-RUN git clone https://github.com/bbuchfink/diamond && cd diamond && sed 's/g++/g++ -std=c++11/' build_simple.sh > tmp && \
- chmod u+x tmp && mv tmp rebuild_simple.sh && ./rebuild_simple.sh && mv diamond /kb/deployment/bin/diamond
 
 RUN echo -e '#!/bin/bash\njava -jar /usr/local/bin/cluster_one-1.0.jar "$@"\n' > /usr/local/bin/cluster_one-1.0.sh && \
 chmod +x /usr/local/bin/cluster_one-1.0.sh
