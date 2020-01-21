@@ -36,12 +36,6 @@
                     "ui-name": "ProkaryoticViralRefSeq85-ICTV"
                 },
                 {
-                    "value": "ProkaryoticViralRefSeq85-Merged",
-                    "display": "Prokaryotic Viral RefSeq version 85 with ICTV and NCBI taxonomies",
-                    "id": "ProkaryoticViralRefSeq85-Merged",
-                    "ui-name": "ProkaryoticViralRefSeq85-Merged"
-                },
-                {
                     "value": "ProkaryoticViralRefSeq88-Merged",
                     "display": "Prokaryotic Viral RefSeq version 88 with ICTV and NCBI taxonomies",
                     "id": "ProkaryoticViralRefSeq88-Merged",
@@ -49,9 +43,9 @@
                 },
                 {
                     "value": "ProkaryoticViralRefSeq94-Merged",
-                    "display": "Prokaryotic Viral RefSeq version 95 with ICTV and NCBI taxonomies",
-                    "id": "ProkaryoticViralRefSeq95-Merged",
-                    "ui-name": "ProkaryoticViralRefSeq95-Merged"
+                    "display": "Prokaryotic Viral RefSeq version 94 with ICTV and NCBI taxonomies",
+                    "id": "ProkaryoticViralRefSeq94-Merged",
+                    "ui-name": "ProkaryoticViralRefSeq94-Merged"
                 },
                 {
                     "value": "ProkaryoticViralRefSeq97-Merged",
@@ -67,8 +61,8 @@
                 },
                 {
                     "value": "ArchaeaViralRefSeq94-Merged",
-                    "display": "Archaeal-virus only RefSeq version 95 with ICTV and NCBI taxonomies",
-                    "id": "ArchaeaViralRefSeq85-Merged",
+                    "display": "Archaeal-virus only RefSeq version 94 with ICTV and NCBI taxonomies",
+                    "id": "ArchaeaViralRefSeq94-Merged",
                     "ui-name": "ArchaeaViralRefSeq94-Merged"
                 },
                 {

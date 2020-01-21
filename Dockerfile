@@ -10,17 +10,6 @@ ENV PATH=/miniconda/bin:${PATH}
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
-#RUN add-apt-repository ppa:george-edison55/cmake-3.x && apt-get update && apt-get install -y cmake
-
-#RUN pip install pandas
-
-#RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-# bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/ && \
-# rm Miniconda3-latest-Linux-x86_64.sh
-
-RUN conda --version
-
-RUN which conda
 
 RUN conda install -y conda-build
 RUN conda install -y -c conda-forge -c bioconda hdf5 pytables pypandoc biopython networkx numpy pandas scipy \
@@ -31,8 +20,7 @@ RUN pip install jsonrpcbase pandas nose jinja2 setuptools-markdown configparser
 RUN git clone https://bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && \
  pip install .
 
-RUN cp vcontact2/vcontact/data/ViralRefSeq-prokaryotes-v*.* /miniconda/lib/python3.7/site-packages/vcontact/data/
-RUN cp vcontact2/vcontact/data/ViralRefSeq-archaea-v*.* /miniconda/lib/python3.7/site-packages/vcontact/data/
+RUN cp vcontact2/vcontact/data/* /miniconda/lib/python3.7/site-packages/vcontact/data/
 
 RUN wget -O /usr/local/bin/cluster_one-1.0.jar http://paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar
 RUN chmod +x /usr/local/bin/cluster_one-1.0.jar
