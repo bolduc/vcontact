@@ -2,7 +2,6 @@
 #BEGIN_HEADER
 import os
 from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
-# from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 
 #END_HEADER
 

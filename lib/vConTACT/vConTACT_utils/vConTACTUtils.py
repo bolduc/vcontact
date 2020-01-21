@@ -11,13 +11,12 @@ from Bio.Alphabet import IUPAC
 from string import Template
 import pandas as pd
 
-from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
 from KBaseReport.KBaseReportClient import KBaseReport
 from Workspace.WorkspaceClient import Workspace
 from GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
 from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
 from installed_clients.AssemblyUtilClient import AssemblyUtil
-from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
+# from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
 from KBaseDataObjectToFileUtils.KBaseDataObjectToFileUtilsClient import KBaseDataObjectToFileUtils as ofu
 
 
@@ -98,12 +97,8 @@ class vConTACTUtils:
             res = self.execute(prodigal_cmd)
 
             records = {}
-            counts = 0
             with open(proteins_fp, 'r') as proteins_fh:
                 for record in SeqIO.parse(proteins_fh, 'fasta'):
-
-                    if record.id.rsplit('_', 1)[0] == 'NC_010152.1':
-                        counts += 1
 
                     records[len(records)] = {
                         'protein_id': record.id,
@@ -130,9 +125,10 @@ class vConTACTUtils:
             params['sequences'] = sequences_fp
 
         elif 'binnedcontigs' in obj_type.lower():  # If KBaseMetagenomes.BinnedContigs
-            pass
+            print('KBaseMetagenomes.BinnedContigs hasnt been enabled. Check back later.')
+            exit(1)
         else:
-            print('ERROR')
+            print('Unknown error in identifying object types')
 
         # Just iterate through all parameters
         mappings = {

@@ -23,8 +23,8 @@ RUN conda --version
 RUN which conda
 
 RUN conda install -y conda-build
-RUN conda install -y -c conda-forge hdf5 pytables pypandoc biopython networkx numpy pandas scipy scikit-learn psutil pyparsing
-RUN conda install -y -c bioconda mcl blast diamond prodigal
+RUN conda install -y -c conda-forge -c bioconda hdf5 pytables pypandoc biopython networkx numpy pandas scipy \
+ scikit-learn psutil pyparsing mcl blast diamond prodigal
 
 RUN pip install jsonrpcbase pandas nose jinja2 setuptools-markdown configparser
 
