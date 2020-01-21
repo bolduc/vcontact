@@ -32,6 +32,7 @@ RUN git clone https://bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && 
  pip install .
 
 RUN cp vcontact2/vcontact/data/ViralRefSeq-prokaryotes-v*.* /miniconda/lib/python3.7/site-packages/vcontact/data/
+RUN cp vcontact2/vcontact/data/ViralRefSeq-archaea-v*.* /miniconda/lib/python3.7/site-packages/vcontact/data/
 
 RUN wget -O /usr/local/bin/cluster_one-1.0.jar http://paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar
 RUN chmod +x /usr/local/bin/cluster_one-1.0.jar
