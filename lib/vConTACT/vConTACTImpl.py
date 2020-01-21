@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 #BEGIN_HEADER
 import os
-from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
-from KBaseDataObjectToFileUtils.KBaseDataObjectToFileUtilsClient import KBaseDataObjectToFileUtils as ofu
 from vConTACT.vConTACT_utils.vConTACTUtils import vConTACTUtils
-from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
-
-from GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
-from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
+# from vConTACT.kb_object_utils.KBObjectUtils import KBObjectUtils
 
 #END_HEADER
 
@@ -38,9 +33,10 @@ class vConTACT:
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
         self.config = config
+        self.callback_url = os.environ['SDK_CALLBACK_URL']
+        self.token = os.environ['KB_AUTH_TOKEN']
         #END_CONSTRUCTOR
         pass
-
 
     def run_vcontact(self, ctx, params):
         """
@@ -49,28 +45,10 @@ class vConTACT:
         """
         # ctx is the context object
         #BEGIN run_vcontact
-        self.callback_url = os.environ['SDK_CALLBACK_URL']
-        params['SDK_CALLBACK_URL'] = self.callback_url
-        params['KB_AUTH_TOKEN'] = os.environ['KB_AUTH_TOKEN']
 
         vc = vConTACTUtils(self.config)
 
-        self.genome_api = GenomeAnnotationAPI(self.callback_url)
-        genome = params['genome']
-
-        genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
-
-        # Convert genome data into "reasonable" parse form and write to scratch filesystem
-        gene2genome, sequences = vc.genome_to_inputs(genome_data)
-        gene2genome_fp, sequences_fp = vc.write_inputs(gene2genome, sequences)
-
-        # Pass locations to the app and run
-        params['gene2genome'] = gene2genome_fp
-        params['sequences'] = sequences_fp
         returnVal = vc.run_vcontact(params)  # Output
-
-        # kbo = KBObjectUtils(self.config)
-        # kbo.create_report(params['workspace_name'])
 
         return [returnVal]
 

@@ -1,7 +1,7 @@
 #
 # define display information
 #
-name: vConTACT2 0.9.5
+name: vConTACT2 0.9.13
 
 tooltip: |
     Viral cluster automatic cluster taxonomy
@@ -225,6 +225,6 @@ description : |
 publications :
     -
         display-text: |
-            Bolduc B, Jang H Bin, Doulcier G, You Z, Roux S, Sullivan MB. (2017). vConTACT: an iVirus tool to classify double-stranded DNA viruses that infect Archaea and Bacteria. PeerJ 5: e3243.
+            Bin Jang, H., Bolduc, B., Zablocki, O., Kuhn, J. H., Roux, S., Adriaenssens, E. M., … Sullivan, M. B. (2019). Taxonomic assignment of uncultivated prokaryotic virus genomes is enabled by gene-sharing networks. Nature Biotechnology, 37(6), 632–639. https://doi.org/10.1038/s41587-019-0100-8
         link: https://www.ncbi.nlm.nih.gov/pubmed/28480138
         pmid: 28480138

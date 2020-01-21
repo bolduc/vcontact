@@ -2,8 +2,8 @@ import sys
 import os
 import os.path
 from jinja2 import Template
-from ConfigParser import ConfigParser
-import StringIO
+from configparser import ConfigParser
+from io import StringIO
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

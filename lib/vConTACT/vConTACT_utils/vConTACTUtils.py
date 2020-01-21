@@ -13,6 +13,12 @@ import pandas as pd
 
 from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
 from KBaseReport.KBaseReportClient import KBaseReport
+from Workspace.WorkspaceClient import Workspace
+from GenomeAnnotationAPI.GenomeAnnotationAPIClient import GenomeAnnotationAPI
+from DataFileUtil.DataFileUtilClient import DataFileUtil as dfu
+from installed_clients.AssemblyUtilClient import AssemblyUtil
+from GenomeFileUtil.GenomeFileUtilClient import GenomeFileUtil as gfu
+from KBaseDataObjectToFileUtils.KBaseDataObjectToFileUtilsClient import KBaseDataObjectToFileUtils as ofu
 
 
 def log(message, prefix_newline=False):
@@ -50,14 +56,85 @@ class vConTACTUtils:
 
     def __init__(self, config):
         self.scratch = os.path.abspath(config['scratch'])
+        self.callback_url = os.environ['SDK_CALLBACK_URL']
+        self.token = os.environ['KB_AUTH_TOKEN']
+        self.scratch = os.path.abspath(config['scratch'])
+        self.ws = Workspace(config['workspace-url'], token=self.token)
+        self.genome_api = GenomeAnnotationAPI(self.callback_url)
+        self.au = AssemblyUtil(self.callback_url)
 
     def vcontact_help(self):
         command = "vcontact --help"
         self._run_command(command)
 
+    def execute(self, command: list):
+        """
+        :param command: Command suitable for running in subprocess, must use a ['ls', '-l'] format
+        :return: Response from command
+        """
+        # logger.info('Running command: {}'.format(command))
+        print('Running command: {}'.format(' '.join(command)))
+        res = subprocess.run(command, shell=False, encoding='utf-8', check=True)
+
+        return res
+
     def run_vcontact(self, params):
 
-        #
+        # Determine KBase "inputs" for vConTACT2
+        genome = params['genome']
+
+        obj_type = self.ws.get_object_info3({'objects': [{'ref': genome}]})['infos'][0][2]
+
+        if 'assembly' in obj_type.lower():  # If KBaseGenomeAnnotations.Assembly
+
+            # Assembly requires annotation
+            genome_fp = self.au.get_assembly_as_fasta({'ref': genome})['path']
+            proteins_fp = os.path.join(self.scratch, 'proteins.faa')
+            proteins_gbk = os.path.join(self.scratch, 'proteins.gbk')
+            gene2genome_fp = os.path.join(self.scratch, 'gene2genome.csv')
+
+            prodigal_cmd = ['prodigal', '-a', proteins_fp, '-o', proteins_gbk, '-f', 'gbk',
+                            '-i', genome_fp, '-p', 'meta']
+            res = self.execute(prodigal_cmd)
+
+            records = {}
+            counts = 0
+            with open(proteins_fp, 'r') as proteins_fh:
+                for record in SeqIO.parse(proteins_fh, 'fasta'):
+
+                    if record.id.rsplit('_', 1)[0] == 'NC_010152.1':
+                        counts += 1
+
+                    records[len(records)] = {
+                        'protein_id': record.id,
+                        'contig_id': record.id.rsplit('_', 1)[0],
+                        'keywords': 'None'
+                    }
+
+            g2g_df = pd.DataFrame.from_dict(records, orient='index')
+            g2g_df.to_csv(gene2genome_fp, index=False)
+
+            # Pass filepaths to the app and run
+            params['gene2genome'] = gene2genome_fp
+            params['sequences'] = proteins_fp
+
+        elif 'kbasegenomes' in obj_type.lower(): # If KBaseGenomes.Genome
+            genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
+
+            # Convert genome data into "reasonable" parse form and write to scratch filesystem
+            gene2genome, sequences = self.genome_to_inputs(genome_data)
+            gene2genome_fp, sequences_fp = self.write_inputs(gene2genome, sequences)
+
+            # Pass filepaths to the app and run
+            params['gene2genome'] = gene2genome_fp
+            params['sequences'] = sequences_fp
+
+        elif 'binnedcontigs' in obj_type.lower():  # If KBaseMetagenomes.BinnedContigs
+            pass
+        else:
+            print('ERROR')
+
+        # Just iterate through all parameters
         mappings = {
             'gene2genome': '--proteins-fp',
             'sequences': '--raw-proteins',
@@ -185,7 +262,7 @@ class vConTACTUtils:
         """
 
         # Get
-        self.dfu = dfu(params['SDK_CALLBACK_URL'])
+        self.dfu = dfu(self.callback_url)
 
         # Get filepath of summary file
         summary_fp = os.path.join(os.getcwd(), 'outdir', 'genome_by_genome_overview.csv')
@@ -227,7 +304,7 @@ class vConTACTUtils:
                          #                      'description': 'Imported Matrix'}],
                          }
 
-        kbase_report_client = KBaseReport(params['SDK_CALLBACK_URL'], token=params['KB_AUTH_TOKEN'])
+        kbase_report_client = KBaseReport(self.callback_url, token=self.token)
         output = kbase_report_client.create_extended_report(report_params)
 
         report_output = {'report_name': output['name'], 'report_ref': output['ref']}
