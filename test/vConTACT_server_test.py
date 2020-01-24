@@ -81,7 +81,7 @@ class vConTACTTest(unittest.TestCase):
             'workspace_name': self.getWsName(),
             # 'genome': '21832/12/1',  # KBaseGenome
             'genome': '21832/10/1',  # KBaseAssembly
-            'db': 'ArchaeaViralRefSeq97-Merged',
+            'db': 'ArchaeaViralRefSeq94-Merged',
             'pcs_mode': 'MCL',
             'vcs_mode': 'ClusterONE',
             'blast_evalue': '0.0001',
