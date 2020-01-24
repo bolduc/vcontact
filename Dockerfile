@@ -17,8 +17,10 @@ RUN conda install -y -c conda-forge -c bioconda hdf5 pytables pypandoc biopython
 
 RUN pip install jsonrpcbase pandas nose jinja2 setuptools-markdown configparser
 
+RUN echo "Force reinstall"
 RUN git clone https://bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && pip install .
 
+RUN echo "Force copy"
 RUN cp vcontact2/vcontact/data/ViralRefSeq-* /miniconda/lib/python3.7/site-packages/vcontact/data/
 
 RUN wget -O /usr/local/bin/cluster_one-1.0.jar http://paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar
