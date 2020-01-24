@@ -130,6 +130,9 @@ class vConTACTUtils:
         else:
             print('Unknown error in identifying object types')
 
+        print('Available database files')
+        print(os.listdir('/miniconda/lib/python3.7/site-packages/vcontact/data/'))
+
         # Just iterate through all parameters
         mappings = {
             'gene2genome': '--proteins-fp',

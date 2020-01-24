@@ -17,7 +17,6 @@ RUN conda install -y -c conda-forge -c bioconda hdf5 pytables pypandoc biopython
 
 RUN pip install jsonrpcbase pandas nose jinja2 setuptools-markdown configparser
 
-RUN echo "force run"
 RUN git clone https://bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && pip install .
 
 RUN cp vcontact2/vcontact/data/ViralRefSeq-* /miniconda/lib/python3.7/site-packages/vcontact/data/
