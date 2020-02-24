@@ -261,7 +261,7 @@
         },
         {
             "id": "merge_method",
-            "optional": true,
+            "optional": false,
             "advanced": true,
             "allow_multiple": false,
             "default_values": [ "single" ],
@@ -283,7 +283,7 @@
         },
         {
             "id": "similarity",
-            "optional": true,
+            "optional": false,
             "advanced": true,
             "allow_multiple": false,
             "default_values": [ "match" ],
@@ -317,7 +317,7 @@
         },
         {
             "id": "seed_method",
-            "optional": true,
+            "optional": false,
             "advanced": true,
             "allow_multiple": false,
             "default_values": [ "nodes" ],

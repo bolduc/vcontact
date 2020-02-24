@@ -8,7 +8,7 @@ tooltip: |
 
 screenshots: []
 
-icon: icon.png
+icon: vcontact2_56pt-teal.png
 
 #
 # define a set of similar methods that might be useful to the user
@@ -31,11 +31,11 @@ suggestions:
 parameters :
     genome :
         ui-name : |
-            Input viral genome
+            Input viral genome(s)
         short-hint : |
-            Input viral genome
+            Input viral genome(s) as either KBase Genome or Assembly objects.
         long-hint  : |
-            The first parameter that needs to be entered to drive the method. This might be the first of many.
+            Input viral genome(s) as either KBase Genome or Assembly objects.
     db :
         ui-name : |
             Reference database
