@@ -3,8 +3,8 @@
     "authors": [
         "bbolduc"
     ],
-    "contact": "",
-    "categories": ["active"],
+    "contact": "bolduc.10@osu.edu",
+    "categories": ["active", "virus", "annotation"],
     "widgets": {
         "input": null,
         "output": null
@@ -53,6 +53,12 @@
                     "id": "ProkaryoticViralRefSeq97-Merged",
                     "ui-name": "ProkaryoticViralRefSeq97-Merged"
                 },
+                    {
+                    "value": "ProkaryoticViralRefSeq201-Merged",
+                    "display": "Prokaryotic Viral RefSeq version 201 with ICTV and NCBI taxonomies",
+                    "id": "ProkaryoticViralRefSeq201-Merged",
+                    "ui-name": "ProkaryoticViralRefSeq201-Merged"
+                },
                 {
                     "value": "ArchaeaViralRefSeq85-Merged",
                     "display": "Archaeal-virus only RefSeq version 85 with ICTV and NCBI taxonomies",
@@ -70,6 +76,12 @@
                     "display": "Archaeal-virus only RefSeq version 97 with ICTV and NCBI taxonomies",
                     "id": "ArchaeaViralRefSeq97-Merged",
                     "ui-name": "ArchaeaViralRefSeq97-Merged"
+                },
+                    {
+                    "value": "ArchaeaViralRefSeq201-Merged",
+                    "display": "Archaeal-virus only RefSeq version 201 with ICTV and NCBI taxonomies",
+                    "id": "ArchaeaViralRefSeq201-Merged",
+                    "ui-name": "ArchaeaViralRefSeq201-Merged"
                 }
                 ]
             }
