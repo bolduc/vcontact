@@ -8,6 +8,8 @@ MAINTAINER KBase Developer
 
 ENV PATH=/miniconda/bin:${PATH}
 
+RUN echo "Force update"
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
 
