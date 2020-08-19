@@ -8,14 +8,15 @@ MAINTAINER KBase Developer
 
 ENV PATH=/miniconda/bin:${PATH}
 
-RUN echo "Force update"
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
 
 RUN conda install -y conda-build
 RUN conda install -y -c conda-forge -c bioconda hdf5 pytables pypandoc biopython networkx numpy pandas scipy \
- scikit-learn psutil pyparsing mcl blast diamond prodigal
+scikit-learn psutil pyparsing mcl blast prodigal
+
+RUN wget http://github.com/bbuchfink/diamond/releases/download/v2.0.2/diamond-linux64.tar.gz && tar xzf diamond-linux64.tar.gz
+RUN chmod +x diamond && cp diamond /usr/local/bin/
 
 RUN pip install jsonrpcbase pandas nose jinja2 setuptools-markdown configparser
 
