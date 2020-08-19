@@ -19,11 +19,7 @@ RUN pip install jsonrpcbase pandas nose jinja2 setuptools-markdown configparser
 
 RUN git clone https://bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && pip install .
 
-RUN ls -ltrh /miniconda/lib/python3.8/site-packages/
-
-RUN ls -ltrh /miniconda/lib/python3.8/site-packages/vcontact2/
-
-RUN cp /vcontact2/vcontact2/data/ViralRefSeq-* /miniconda/lib/python3.8/site-packages/vcontact2/data/
+RUN cp /vcontact2/vcontact2/data/ViralRefSeq-* /miniconda/lib/python3.7/site-packages/vcontact2/data/
 
 RUN wget -O /usr/local/bin/cluster_one-1.0.jar http://paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar
 RUN chmod +x /usr/local/bin/cluster_one-1.0.jar
