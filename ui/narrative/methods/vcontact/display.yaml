@@ -56,7 +56,7 @@ parameters :
         short-hint : |
             Viral cluster method to use.
         long-hint  : |
-            Whether to use ClusterONE or MCL for Viral Cluster (VC) generation
+            Whether to use ClusterONE or MCL for Viral Cluster (VC) generation.
     blast_evalue :
         ui-name : |
             BLASTP evalue cutoff
@@ -103,7 +103,7 @@ parameters :
         ui-name : |
             VC density cutoff
         short-hint : |
-            ClusterONE minimum density per viral cluster
+            ClusterONE minimum density per viral cluster.
         long-hint  : |
             Sets the minimum density of predicted viral clusters. (ClusterONE only)
     vc_min_size :
@@ -201,16 +201,16 @@ parameters :
         ui-name : |
             Module shared minimum
         short-hint : |
-            Minimum contigs a PC must be present within to be included.
+            Minimum number of contigs a PC must be present within to be included.
         long-hint  : |
-            Minimal number (inclusive) of contigs a PC must appear into to be taken into account in the modules computing.
+            Minimal number (inclusive) of contigs a PC must appear in to be taken into account in the modules computing.
     link_significance :
         ui-name : |
             Link significance
         short-hint : |
             Threshold to link viral cluster and module.
         long-hint  : |
-            Significitaivity threshold to link a cluster and a module.
+            Significativity threshold to link a cluster and a module.
     link_proportion :
         ui-name : |
             Link proportion
@@ -220,7 +220,8 @@ parameters :
             Proportion of a module's PC a viral genome must have to be considered as displaying this module.
 
 description : |
-    <p>vConTACT2 is a tool to perform guilt-by-contig-association automatic classification of viral contigs.</p>
+    <p>vConTACT2 (Viral CONTigs Automatic Clustering and Taxonomy) is a tool to perform guilt-by-contig-association automatic classification of viral contigs. See the publication link listed below for more information on the tool.
+    Terminology used in this app: MCL=Markov cluster, PC=protein cluser, VC=Viral cluster, ClusterONE=Clustering with Overlapping Neighborhood Expansion. </p>
 
 publications :
     -
