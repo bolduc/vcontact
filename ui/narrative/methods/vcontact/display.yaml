@@ -31,18 +31,18 @@ suggestions:
 parameters :
     genome :
         ui-name : |
-            Input viral genome(s)
+            Input viral genome
         short-hint : |
-            Input viral genome(s) as either KBase Genome or Assembly objects.
+            Input viral genome as either KBase Genome or Assembly objects.
         long-hint  : |
-            Input viral genome(s) as either KBase Genome or Assembly objects.
+            Input viral genome as either KBase Genome or Assembly objects.
     db :
         ui-name : |
             Reference database
         short-hint : |
             Reference database to de novo cluster proteins against.
         long-hint  : |
-            A selected reference database to de novo cluster proteins against. If 'none' is selected, be aware that there will be no references included in the analysis and no taxonomic information.
+            A selected reference database to de novo cluster proteins against. If the reference is changed to be blank, be aware that there will be no references included in the analysis and no taxonomic information.
     pcs_mode :
         ui-name : |
             PC method
@@ -226,6 +226,6 @@ description : |
 publications :
     -
         display-text: |
-            Bin Jang, H., Bolduc, B., Zablocki, O., Kuhn, J. H., Roux, S., Adriaenssens, E. M., … Sullivan, M. B. (2019). Taxonomic assignment of uncultivated prokaryotic virus genomes is enabled by gene-sharing networks. Nature Biotechnology, 37(6), 632–639. https://doi.org/10.1038/s41587-019-0100-8
+            Bin Jang, H., Bolduc, B., Zablocki, O., Kuhn, J. H., Roux, S., Adriaenssens, E. M., … Sullivan, M. B. Taxonomic assignment of uncultivated prokaryotic virus genomes is enabled by gene-sharing networks. Nature Biotechnology. 2019;37(6): 632–639. https://doi.org/10.1038/s41587-019-0100-8
         link: https://www.ncbi.nlm.nih.gov/pubmed/28480138
         pmid: 28480138
