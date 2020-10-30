@@ -7,8 +7,8 @@ from collections import OrderedDict
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from Bio.Alphabet import IUPAC
 from string import Template
+from pyparsing import Literal, SkipTo
 import pandas as pd
 
 from KBaseReport.KBaseReportClient import KBaseReport
@@ -30,12 +30,30 @@ def log(message, prefix_newline=False):
 html_template = Template("""<!DOCTYPE html>
 <html lang="en">
   <head>
+  
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js" type="text/javascript"></script>
+  
+    <style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+    </style>
+  
   </head>
+  
   <body>
+  
     <div class="container">
       <div>
         ${html_table}
@@ -44,9 +62,35 @@ html_template = Template("""<!DOCTYPE html>
 
     <script type="text/javascript">
       $$(document).ready(function() {
-          $$('#my_id').DataTable();
+        $$('#my_id tfoot th').each( function () {
+          var title = $$(this).text();
+          $$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        });
+
+        var table = $$('#my_id').DataTable({
+          buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'],
+          scrollX: true,
+          dom: 'Bfrtip'  //Necessary for buttons to work
+        });
+
+        table.columns().every( function () {
+          var that = this;
+
+          $$( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+              that
+              .search( this.value )
+              .draw();
+            }
+          });
+        } );
       } );
-      </script>
+    </script>
+    
   </body>
 </html>""")
 
@@ -219,7 +263,7 @@ class vConTACTUtils:
             else:
                 # Create FASTA file
                 if item['type'] == 'gene':
-                    gene_record = SeqRecord(Seq(item['protein_translation'], IUPAC.protein), id=item['id'],
+                    gene_record = SeqRecord(Seq(item['protein_translation']), id=item['id'],
                                             description=item['function'])
                     records.append(gene_record)
 
@@ -267,17 +311,38 @@ class vConTACTUtils:
         summary_fp = os.path.join(os.getcwd(), 'outdir', 'genome_by_genome_overview.csv')
 
         summary_df = pd.read_csv(summary_fp, header=0, index_col=0)
-        html = summary_df.to_html(index=False, classes='my_class" id = "my_id')
+        html = summary_df.to_html(index=False, classes='my_class table-striped" id = "my_id')
 
         # Need to file write below
         direct_html = html_template.substitute(html_table=html)
+
+        # Find header so it can be copied to footer, as dataframe.to_html doesn't include footer
+        start_header = Literal("<thead>")
+        end_header = Literal("</thead>")
+
+        text = start_header + SkipTo(end_header)
+
+        new_text = ''
+        for data, start_pos, end_pos in text.scanString(direct_html):
+            new_text = ''.join(data).replace(' style="text-align: right;"', '').replace('thead>',
+                                                                                        'tfoot>\n  ') + '\n</tfoot>'
+
+        # Get start and end positions to insert new text
+        end_tbody = Literal("</tbody>")
+        end_table = Literal("</table>")
+
+        insertion_pos = end_tbody + SkipTo(end_table)
+
+        final_html = ''
+        for data, start_pos, end_pos in insertion_pos.scanString(direct_html):
+            final_html = direct_html[:start_pos + 8] + '\n' + new_text + direct_html[start_pos + 8:]
 
         output_dir = os.path.join(self.scratch, str(uuid.uuid4()))
         self._mkdir_p(output_dir)
         result_fp = os.path.join(output_dir, 'index.html')
 
         with open(result_fp, 'w') as result_fh:
-            result_fh.write(direct_html)
+            result_fh.write(final_html)
 
         report_shock_id = self.dfu.file_to_shock({
             'file_path': output_dir,
