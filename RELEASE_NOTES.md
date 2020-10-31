@@ -1,6 +1,6 @@
 # vConTACT release notes
 =========================================
 
-0.11.24
+0.11.25
 -----
 * Module created by kb-sdk init
