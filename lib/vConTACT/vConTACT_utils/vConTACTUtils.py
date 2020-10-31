@@ -72,13 +72,13 @@ html_template = Template("""<!DOCTYPE html>
 
         var table = $$('#my_id').DataTable({
           buttons: [
-            'copy',
-            'csv',
-            'excel',
+            'copyHtml5',
+            'csvHtml5',
+            'excelHtml5',
             'print',
-            'pdf'],
+            'pdfHtml5'],
           scrollX: true,
-          dom: 'lBfrtip'  //Necessary for buttons to work
+          dom: 'lPfrtip'  //Necessary for buttons to work
         });
 
         table.columns().every( function () {
