@@ -269,8 +269,10 @@ class vConTACTUtils:
             else:
                 # Create FASTA file
                 if item['type'] == 'gene':
+                    desc = (item['functions'] if item.get('functions', None)
+                                              else item.get('function', ''))
                     gene_record = SeqRecord(Seq(item['protein_translation']), id=item['id'],
-                                            description=item['function'])
+                                            description=desc)
                     records.append(gene_record)
 
                     # Build gene2genome
