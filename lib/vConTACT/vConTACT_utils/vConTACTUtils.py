@@ -32,14 +32,14 @@ html_template = Template("""<!DOCTYPE html>
   <head>
   
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
 
-    <link href="https://cdn.datatables.net/searchpanes/1.2.0/css/searchPanes.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript"></script>
@@ -48,8 +48,8 @@ html_template = Template("""<!DOCTYPE html>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js" type="text/javascript"></script>
 
-    <script src="https://cdn.datatables.net/searchpanes/1.2.0/js/dataTables.searchPanes.min.js" type="text/javascript"></script>
-    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js" type="text/javascript"></script>
   
     <style>
     tfoot input {
@@ -76,11 +76,21 @@ html_template = Template("""<!DOCTYPE html>
           $$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         });
 
-        var table = $$('#my_id').DataTable({
+        var table = $('#my_id').DataTable({
           buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'],
+            'copy',
+            'csv',
+            'excel',
+            'pdf','print',
+            {
+              extend: 'searchPanes',
+              config: {
+                cascadePanes: true
+              }
+            }
+          ],
           scrollX: true,
-          dom: 'lPfrtip'  //Necessary for buttons to work
+          dom: 'lBfrtip'  //Necessary for buttons to work
         });
 
         table.columns().every( function () {
@@ -319,7 +329,7 @@ class vConTACTUtils:
         summary_fp = os.path.join(os.getcwd(), 'outdir', 'genome_by_genome_overview.csv')
 
         summary_df = pd.read_csv(summary_fp, header=0, index_col=0)
-        html = summary_df.to_html(index=False, classes='my_class table-striped" id = "my_id')
+        html = summary_df.to_html(index=False, classes='my_class table-striped nowrap display" id = "my_id')
 
         # Need to file write below
         direct_html = html_template.substitute(html_table=html)
