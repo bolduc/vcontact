@@ -76,7 +76,7 @@ html_template = Template("""<!DOCTYPE html>
           $$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         });
 
-        var table = $('#my_id').DataTable({
+        var table = $$('#my_id').DataTable({
           buttons: [
             'copy',
             'csv',
