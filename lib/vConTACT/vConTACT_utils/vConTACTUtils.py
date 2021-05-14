@@ -173,7 +173,7 @@ class vConTACTUtils:
             params['gene2genome'] = gene2genome_fp
             params['sequences'] = proteins_fp
 
-        elif 'kbasegenomes' in obj_type.lower(): # If KBaseGenomes.Genome
+        elif 'kbasegenomes' in obj_type.lower():  # If KBaseGenomes.Genome
             genome_data = self.genome_api.get_genome_v1({"genomes": [{"ref": genome}]})
 
             # Convert genome data into "reasonable" parse form and write to scratch filesystem
