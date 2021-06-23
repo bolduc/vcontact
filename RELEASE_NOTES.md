@@ -1,6 +1,10 @@
 # vConTACT release notes
 =========================================
 
+0.11.33 (2021-06-23)
+--------------------
+Added ClusterONE-generated network file and final summary file as downloadable results
+
 0.11.32 (2021-03-26)
 --------------------
 Fixed HTML syntax substitution error

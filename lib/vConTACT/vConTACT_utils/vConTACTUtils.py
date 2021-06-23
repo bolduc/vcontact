@@ -10,6 +10,8 @@ from Bio.SeqRecord import SeqRecord
 from string import Template
 from pyparsing import Literal, SkipTo
 import pandas as pd
+import tarfile
+from shutil import copyfile
 
 from KBaseReport.KBaseReportClient import KBaseReport
 from Workspace.WorkspaceClient import Workspace
@@ -362,6 +364,30 @@ class vConTACTUtils:
         with open(result_fp, 'w') as result_fh:
             result_fh.write(final_html)
 
+        output_files = []
+        c1_ntw_fp = os.path.join(os.getcwd(), 'outdir', 'c1.ntw')
+
+        c1_ntw_tgz_fp = os.path.join(output_dir, 'c1.ntw.tar.gz')
+        with tarfile.open(c1_ntw_tgz_fp, 'w:gz') as c1_ntw_tgz_fh:
+            c1_ntw_tgz_fh.add(c1_ntw_fp, arcname=os.path.basename(c1_ntw_fp))
+
+        output_files.append({
+            'path': c1_ntw_tgz_fp,
+            'name': 'c1.ntw.tar.gz',
+            'label': 'c1.ntw.tar.gz',
+            'description': 'ClusterONE network file suitable for import into Cytoscape or other graph tools'
+        })
+
+        dest_summary_fp = os.path.join(os.getcwd(), 'outdir', os.path.basename(summary_fp))
+        copyfile(summary_fp, dest_summary_fp)
+
+        output_files.append({
+            'path': dest_summary_fp,
+            'name': os.path.basename(dest_summary_fp),
+            'label': os.path.basename(dest_summary_fp),
+            'description': 'Final summary file generated directly by vConTACT2'
+        })
+
         report_shock_id = self.dfu.file_to_shock({
             'file_path': output_dir,
             'pack': 'zip'
@@ -379,8 +405,7 @@ class vConTACTUtils:
                          'html_links': html_report,
                          'direct_html_link_index': 0,
                          'report_object_name': 'vConTACT_report_{}'.format(str(uuid.uuid4())),
-                         # Don't use until have files to attach to report
-                         # 'file_links': [{}],
+                         'file_links': output_files,
                          # Don't use until data objects that are created as result of running app
                          # 'objects_created': [{'ref': matrix_obj_ref,
                          #                      'description': 'Imported Matrix'}],
