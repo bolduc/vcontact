@@ -1,6 +1,10 @@
 # vConTACT release notes
 =========================================
 
+0.11.34 (2021-06-23)
+--------------------
+
+
 0.11.33 (2021-06-23)
 --------------------
 Added ClusterONE-generated network file and final summary file as downloadable results

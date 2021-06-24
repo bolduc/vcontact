@@ -378,7 +378,7 @@ class vConTACTUtils:
             'description': 'ClusterONE network file suitable for import into Cytoscape or other graph tools'
         })
 
-        dest_summary_fp = os.path.join(os.getcwd(), 'outdir', os.path.basename(summary_fp))
+        dest_summary_fp = os.path.join(output_dir, os.path.basename(summary_fp))
         copyfile(summary_fp, dest_summary_fp)
 
         output_files.append({
