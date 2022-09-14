@@ -293,7 +293,7 @@ class vConTACTUtils:
                             # 'contig_id': genome_data['data']['contig_ids'][0],
                             'contig_id': item['location'][0][0],
                             'protein_id': item['id'],
-                            'keywords': item['function']
+                            'keywords': item['functions'][0]
                         }
                     })
 

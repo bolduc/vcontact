@@ -1,6 +1,10 @@
 # vConTACT release notes
 =========================================
 
+0.11.36 (2021-06-24)
+--------------------
+Update to reflect changes to genome object
+
 0.11.35 (2021-06-24)
 --------------------
 Update version as a result of 0.11.34 error

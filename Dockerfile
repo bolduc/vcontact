@@ -6,25 +6,26 @@ MAINTAINER KBase Developer
 # install line here, a git checkout to download code, or run any other
 # installation scripts.
 
-ENV PATH=/miniconda/bin:${PATH}
+ENV PATH=/miniconda/bin:/usr/local/bin:${PATH}
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip
+RUN apt-get update && apt-get install -y automake build-essential bzip2 wget git default-jre unzip ca-certificates
 
-RUN conda install -y conda-build
-RUN conda install -y -c conda-forge -c bioconda hdf5 pytables pypandoc biopython networkx numpy pandas scipy \
-scikit-learn psutil pyparsing mcl blast prodigal
+RUN conda update -y -n base conda
+
+RUN conda install -n base -c conda-forge 'python=3.7.*' conda-build
+
+RUN conda install -y -c bioconda -c conda-forge "vcontact2==0.9.19" hdf5 pytables pypandoc biopython networkx "numpy<1.19.5" \
+    "pandas==0.25.3" scipy scikit-learn psutil pyparsing mcl blast prodigal
+
+RUN conda clean -y --all
 
 RUN wget http://github.com/bbuchfink/diamond/releases/download/v0.9.36/diamond-linux64.tar.gz && tar xzf diamond-linux64.tar.gz
 RUN chmod +x diamond && cp diamond /usr/local/bin/
 
-RUN pip install jsonrpcbase pandas nose jinja2 setuptools-markdown configparser
+RUN pip install jsonrpcbase nose jinja2 setuptools-markdown configparser #pyparsing pandas
 
-RUN git clone https://bitbucket.org/MAVERICLab/vcontact2.git && cd vcontact2 && pip install .
-
-RUN cp /vcontact2/vcontact2/data/ViralRefSeq-* /miniconda/lib/python3.7/site-packages/vcontact2/data/
-
-RUN wget -O /usr/local/bin/cluster_one-1.0.jar http://paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar
+RUN wget http://paccanarolab.org/static_content/clusterone/cluster_one-1.0.jar && mv cluster_one-1.0.jar /usr/local/bin/
 RUN chmod +x /usr/local/bin/cluster_one-1.0.jar
 
 # Clean stuff up to reduce disk space
