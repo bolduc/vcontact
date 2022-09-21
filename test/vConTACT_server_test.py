@@ -79,8 +79,8 @@ class vConTACTTest(unittest.TestCase):
     def test_run_vcontact(self):
         ret = self.getImpl().run_vcontact(self.getContext(), {
             'workspace_name': self.getWsName(),
-            # 'genome': '21832/12/1',  # KBaseGenome
-            'genome': '21832/10/1',  # KBaseAssembly
+            'genome': '21832/12/1',  # KBaseGenome
+            # 'genome': '21832/10/1',  # KBaseAssembly
             'db': 'ArchaeaViralRefSeq201-Merged',
             'pcs_mode': 'MCL',
             'vcs_mode': 'ClusterONE',

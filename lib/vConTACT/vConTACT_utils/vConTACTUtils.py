@@ -12,6 +12,7 @@ from pyparsing import Literal, SkipTo
 import pandas as pd
 import tarfile
 from shutil import copyfile
+from pprint import pprint
 
 from KBaseReport.KBaseReportClient import KBaseReport
 from Workspace.WorkspaceClient import Workspace
@@ -272,17 +273,18 @@ class vConTACTUtils:
         genome_data = genome['genomes'][0]
 
         for item in genome_data['data']['features']:
-            if 'id' not in item:
+            if not all(x in item for x in ['id']):
                 continue
                 print('This feature does not have a valid id')
-            elif 'dna_sequence' not in item or 'protein_translation' not in item:
+            elif not all(x in item for x in ['dna_sequence', 'protein_translation']):
                 continue
                 print('This feature {} does not have a valid DNA sequence.'.format(item['id']))
+            elif not any(x in item for x in ['function', 'functions']):  # Needs to have at least one of these!
+                continue
+                print('This feature {} does not have a valid sequence.'.format(item['id']))
             else:
                 # Create FASTA file
                 if item['type'] == 'gene':
-                    desc = (item['functions'] if item.get('functions', '')
-                            else item.get('function', ''))
                     gene_record = SeqRecord(Seq(item['protein_translation']), id=item['id'],
                                             description='')
                     records.append(gene_record)
@@ -290,10 +292,10 @@ class vConTACTUtils:
                     # Build gene2genome
                     gene2genome.update({
                         item['id']: {
-                            # 'contig_id': genome_data['data']['contig_ids'][0],
                             'contig_id': item['location'][0][0],
                             'protein_id': item['id'],
-                            'keywords': item['functions'][0]
+                            # At least one of these keywords must be present
+                            'keywords': (item['functions'][0] if 'functions' in item else item['function'][0])
                         }
                     })
 

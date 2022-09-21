@@ -1,7 +1,11 @@
 # vConTACT release notes
 =========================================
 
-0.11.36 (2021-06-24)
+0.11.37 (2021-09-21)
+--------------------
+Identified (?) error associated with 'function(s)' in genome object
+
+0.11.36 (2021-09-14)
 --------------------
 Update to reflect changes to genome object
 
